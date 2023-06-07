@@ -1,0 +1,214 @@
+/* Add your CSS styles here to enhance the visual appeal */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Header */
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.nav ul li {
+  margin-right: 20px;
+}
+
+.nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Hero section */
+.hero {
+  background-image: url('img/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 100px 0;
+}
+
+.hero h2 {
+  font-size: 36px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.hero .btn {
+  display: inline-block;
+  background-color: #f44336;
+  color: #fff;
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+/* About section */
+.about {
+  background-color: #f9f9f9;
+  padding: 80px 0;
+}
+
+.about h2 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.about p {
+  font-size: 18px;
+  text-align: justify;
+  text-align: center;
+}
+
+/* Games section */
+.games {
+  padding: 80px 0;
+}
+
+.games h2 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.container {
+  text-align: center;
+}
+
+.game-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-card {
+  max-width: 300px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  /* Add the following properties for card hover effect */
+  transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.game-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.game-card p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.game-card .btn {
+  display: inline-block;
+  background-color: #f44336;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+/* Contact section */
+.contact {
+  background-color: #f9f9f9;
+  padding: 80px 0;
+}
+
+.contact h2 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact ul li {
+  margin-bottom: 10px;
+}
+
+.contact ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Customize the scroll bar for non-WebKit-based browsers (Firefox) */
+/* Firefox 64 and later */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Older Firefox versions */
+html {
+  scrollbar-face-color: #888;
+  scrollbar-track-color: #f1f1f1;
+}
