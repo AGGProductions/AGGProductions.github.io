@@ -1,72 +1,9 @@
-/* Add your CSS styles here to enhance the visual appeal */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-
-/* Header */
-.header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 24px;
-}
-
-.nav ul {
-  list-style: none;
-  display: flex;
-}
-
-.nav ul li {
-  margin-right: 20px;
-}
-
-.nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Hero section */
-.hero {
-  background-image: url('img/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  text-align: center;
-  padding: 100px 0;
-}
-
-.hero h2 {
-  font-size: 36px;
-}
-
-.hero p {
-  font-size: 18px;
-  margin-bottom: 30px;
-}
-
-.hero .btn {
-  display: inline-block;
-  background-color: #f44336;
-  color: #fff;
-  padding: 10px 30px;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 4px;
-}
-
 /* About section */
 .about {
   background-color: #f9f9f9;
   padding: 80px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .about h2 {
@@ -78,11 +15,14 @@ body {
 .about p {
   font-size: 18px;
   text-align: justify;
+  text-align: center;
 }
 
 /* Games section */
 .games {
   padding: 80px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .games h2 {
@@ -151,6 +91,8 @@ body {
 .contact {
   background-color: #f9f9f9;
   padding: 80px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .contact h2 {
@@ -174,105 +116,30 @@ body {
   text-decoration: none;
 }
 
-/* Footer */
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-.footer p {
-  margin: 0;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Customize the scroll bar for non-WebKit-based browsers (Firefox) */
-/* Firefox 64 and later */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
-}
-
-/* Older Firefox versions */
-html {
-  scrollbar-face-color: #888;
-  scrollbar-track-color: #f1f1f1;
-}
-
 /* Media queries */
 @media screen and (max-width: 767px) {
-  /* Header */
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  /* ... Previous styles ... */
 
-  .nav ul li {
-    margin-right: 10px;
-  }
-
-  /* Hero section */
-  .hero {
-    padding: 80px 0;
-  }
-
-  .hero h2 {
-    font-size: 28px;
-  }
-
-  .hero p {
-    font-size: 16px;
+  /* Fix for zooming on phones */
+  body {
+    overflow-x: hidden;
   }
 
   /* About section */
-  .about p {
-    text-align: center;
+  .about {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 
   /* Games section */
-  .game-cards {
-    justify-content: flex-start;
-    padding-bottom: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-  }
-
-  .game-card {
-    width: 200px;
-    margin: 10px 5px;
-  }
-
-  .game-card h3 {
-    font-size: 20px;
-  }
-
-  .game-card p {
-    font-size: 14px;
+  .games {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 
   /* Contact section */
-  .contact p {
-    text-align: center;
-  }
-
-  .contact ul li {
-    text-align: center;
+  .contact {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
