@@ -78,7 +78,6 @@ body {
 .about p {
   font-size: 18px;
   text-align: justify;
-  text-align: center;
 }
 
 /* Games section */
@@ -100,11 +99,14 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
 .game-card {
   max-width: 300px;
-  margin: 20px;
+  width: calc(100% - 20px);
+  margin: 10px;
   padding: 20px;
   background-color: #f9f9f9;
   text-align: center;
@@ -211,4 +213,66 @@ html {
 html {
   scrollbar-face-color: #888;
   scrollbar-track-color: #f1f1f1;
+}
+
+/* Media queries */
+@media screen and (max-width: 767px) {
+  /* Header */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav ul li {
+    margin-right: 10px;
+  }
+
+  /* Hero section */
+  .hero {
+    padding: 80px 0;
+  }
+
+  .hero h2 {
+    font-size: 28px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  /* About section */
+  .about p {
+    text-align: center;
+  }
+
+  /* Games section */
+  .game-cards {
+    justify-content: flex-start;
+    padding-bottom: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .game-card {
+    width: 200px;
+    margin: 10px 5px;
+  }
+
+  .game-card h3 {
+    font-size: 20px;
+  }
+
+  .game-card p {
+    font-size: 14px;
+  }
+
+  /* Contact section */
+  .contact p {
+    text-align: center;
+  }
+
+  .contact ul li {
+    text-align: center;
+  }
 }
