@@ -140,6 +140,7 @@ body {
 .game-card p {
   font-size: 16px;
   margin-bottom: 20px;
+  overflow-wrap: break-word;
 }
 
 .game-card .btn {
