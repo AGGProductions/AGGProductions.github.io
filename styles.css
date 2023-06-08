@@ -278,4 +278,8 @@ html {
   .game-card:hover {
     transform: scale(1.05);
   }
+  
+  .contact ul li a {
+  word-wrap: break-word;
+  }
 }
