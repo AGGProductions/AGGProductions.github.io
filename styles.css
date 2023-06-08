@@ -100,41 +100,26 @@ p {
   padding: 80px 0;
 }
 
-.game-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.game-slider {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.game-card {
-  width: 300px;
-  margin-right: 20px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  border-radius: 4px;
+.game-cards {
+  display: flex;
   transition: transform 0.3s ease;
 }
 
-.game-card:hover {
-  transform: scale(1.05);
-}
-
-.game-card img {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+.game-card {
+  flex: 0 0 300px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-}
-
-.game-card h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.game-card p {
-  font-size: 16px;
-  margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
 
 .game-card .btn {
@@ -145,6 +130,25 @@ p {
   text-decoration: none;
   font-size: 16px;
   border-radius: 4px;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-control {
+  background: transparent;
+  border: none;
+  color: #f44336;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 10px;
 }
 
 /* Contact section */
@@ -200,6 +204,21 @@ p {
   background: #555;
 }
 
+/* Firefox scrollbar */
+
+/* Customize the scroll bar for non-WebKit-based browsers (Firefox) */
+/* Firefox 64 and later */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Older Firefox versions */
+html {
+  scrollbar-face-color: #888;
+  scrollbar-track-color: #f1f1f1;
+}
+
 /* Media queries */
 
 @media screen and (max-width: 767px) {
@@ -211,6 +230,8 @@ p {
 
   .nav ul {
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 10px;
     padding-left: 0px;
   }
@@ -241,5 +262,20 @@ p {
     width: 100%;
     margin-right: 0;
     margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .game-card .btn {
+    display: inline-block;
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .game-card:hover {
+    transform: scale(1.05);
   }
 }
