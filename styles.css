@@ -261,7 +261,7 @@ html {
   .game-card {
     flex: 0 0 calc(100% - 60px);
     max-width: calc(100% - 60px);
-    margin: 0 20px 10px;
+    margin: 0 30px 10px 10px
   }
 
   .game-card img {
