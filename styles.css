@@ -1,5 +1,3 @@
-/* Add your CSS styles here to enhance the visual appeal */
-
 /* General Styles */
 
 body {
@@ -98,12 +96,13 @@ p {
 
 .games {
   padding: 80px 0;
+  overflow: hidden;
 }
 
 .game-slider {
   position: relative;
-  overflow: hidden;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .game-cards {
@@ -140,6 +139,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  scroll-behavior: smooth;
 }
 
 .slider-control {
@@ -259,10 +259,14 @@ html {
   }
 
   .game-card {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
+    flex: 0 0 calc(100% - 60px);
+    max-width: calc(100% - 60px);
+    margin: 0 20px 10px;
+  }
+
+  .game-card img {
+    max-width: 100%;
+    height: auto;
   }
 
   .game-card .btn {
