@@ -71,6 +71,16 @@ margin-bottom: 20px;
 max-width: 100%;
 }
 
+.game-link .btn {
+    display: inline-block;
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
 /* Footer */
 .footer {
 background-color: #333;
