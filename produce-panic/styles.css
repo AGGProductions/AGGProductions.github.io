@@ -71,6 +71,10 @@ margin-bottom: 20px;
 max-width: 100%;
 }
 
+.game-link {
+    margin-top: 20px;
+}
+
 .game-link .btn {
     display: inline-block;
     background-color: #f44336;
