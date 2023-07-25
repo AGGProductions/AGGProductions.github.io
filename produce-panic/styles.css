@@ -1,0 +1,201 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    }
+    
+    .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    }
+    
+    h2 {
+    font-size: 30px;
+    margin-bottom: 40px;
+    }
+    
+    p {
+    font-size: 18px;
+    }
+    
+    /* Header */
+    .header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .logo {
+    font-size: 24px;
+    }
+    
+    .nav ul {
+    list-style: none;
+    display: flex;
+    }
+    
+    .nav ul li {
+    margin-right: 20px;
+    }
+    
+    .nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    }
+    
+    /* Game page styles */
+    
+    main {
+    padding: 20px;
+    }
+    
+    .game-details img {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    }
+    
+    .game-screenshots img {
+    max-width: 300px; /* Adjust the maximum width of the screenshots */
+    height: auto;
+    margin: 10px; /* Add some spacing between the screenshots */
+    }
+
+    .game-screenshots .screenshots {
+        display: flex;
+        overflow-x: auto; /* Add a horizontal scrollbar if content overflows */
+        white-space: nowrap; /* Prevent screenshots from wrapping to the next line */
+        /* Style the scrollbar for WebKit-based browsers (e.g., Chrome, Safari) */
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+    }
+    
+    .center {
+        text-align: center;
+    }
+
+    .game-embed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 40px;
+    }
+    
+    .game-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .game-link .btn {
+      display: inline-block;
+      background-color: #f44336;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    
+    .google-play-btn {
+      display: inline-block;
+      height: 70px; /* Adjust the width as needed */
+    }
+    
+    .google-play-btn img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    
+    /* Footer */
+    .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    }
+    
+    .footer p {
+    margin: 0;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+    width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    background: #888;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
+    
+    /* Firefox scrollbar */
+    
+    /* Customize the scroll bar for non-WebKit-based browsers (Firefox) */
+    /* Firefox 64 and later */
+    html {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    }
+    
+    /* Older Firefox versions */
+    html {
+    scrollbar-face-color: #888;
+    scrollbar-track-color: #f1f1f1;
+    }
+    
+    /* Media queries */
+    @media screen and (max-width: 767px) {
+        /* Styles for mobile devices */
+        .header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    
+        .nav ul {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding-left: 0px;
+        }
+    
+        .nav ul li {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    
+        .game-details img {
+            max-width: 100%;
+        }
+    
+        .game-screenshots img {
+            max-width: 100%;
+        }
+    
+        .game-embed iframe {
+            max-width: 100%;
+        }
+    
+        .contact ul li a {
+            word-wrap: break-word;
+        }
+    }  
+    
