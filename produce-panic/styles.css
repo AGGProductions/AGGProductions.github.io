@@ -62,13 +62,30 @@ body {
     }
     
     .game-screenshots img {
-    max-width: 100%;
+    max-width: 300px; /* Adjust the maximum width of the screenshots */
     height: auto;
-    margin-bottom: 20px;
+    margin: 10px; /* Add some spacing between the screenshots */
+    }
+
+    .game-screenshots .screenshots {
+        display: flex;
+        overflow-x: auto; /* Add a horizontal scrollbar if content overflows */
+        white-space: nowrap; /* Prevent screenshots from wrapping to the next line */
+        /* Style the scrollbar for WebKit-based browsers (e.g., Chrome, Safari) */
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
     }
     
-    .game-embed iframe {
-    max-width: 100%;
+    .center {
+        text-align: center;
+    }
+
+    .game-embed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 40px;
     }
     
     .game-link {
