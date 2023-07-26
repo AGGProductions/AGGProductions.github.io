@@ -1,3 +1,20 @@
+// Function to load the iframe when the button is clicked
+function loadIframe() 
+{
+  const iframe = document.getElementById('game-iframe');
+  const placeholder = document.getElementById('placeholder');
+
+  // Set the source of the iframe to load the game
+  iframe.src = "https://itch.io/embed-upload/8347512?color=333333";
+
+  // Show the iframe and hide the placeholder
+  iframe.style.display = "block";
+  placeholder.style.display = "none";
+
+  // Adjust the size of the iframe
+  adjustIframeSize();
+}
+
 // Function to dynamically adjust the size of the iframe based on the window size
 function adjustIframeSize() 
 {

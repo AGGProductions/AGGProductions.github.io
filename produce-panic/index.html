@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <script src="main.js"></script>
+
   <!-- Include the header section here (similar to index.html) -->
   <header class="header">
     <h1 class="logo">AGG Productions</h1>
@@ -24,11 +24,17 @@
 
   <!-- Main content specific to the Produce Panic game -->
   <main>
-      <h2 class="center">Produce Panic</h2>
+    <h2 class="center">Produce Panic</h2>
 
-      <section class="game-embed">
-      <!-- Add an embedded game here if available -->
-      <iframe id="game-iframe" src="https://itch.io/embed-upload/8347512?color=333333" allowfullscreen="" width="854" height="500" frameborder="0"><a href="https://awesomegamergame.itch.io/produce-panic">Play Produce Panic on itch.io</a></iframe>    
+    <section class="game-embed">
+      <!-- Add a placeholder image and a button to run the game -->
+      <div class="placeholder" id="placeholder">
+        <img src="img/img1.jpg" alt="Screenshot 1">
+        <button class="btn" onclick="loadIframe()">Run Game</button>
+      </div>
+    
+      <!-- The actual iframe (hidden initially) -->
+      <iframe id="game-iframe" style="display:none;" allowfullscreen="" width="854" height="500" frameborder="0" src=""></iframe>
     </section>
 
     <!-- Download Link to itch.io Page -->
@@ -55,8 +61,8 @@
     <section class="game-screenshots">
       <h3>Screenshots</h3>
       <div class="screenshots">
-        <img src="img/img1.jpg" alt="Screenshot 1">
-        <img src="img/img2.jpg" alt="Screenshot 2">
+        <img src="img/img1.jpg" draggable="false" alt="Screenshot 1">
+        <img src="img/img2.jpg" draggable="false" alt="Screenshot 2">
         <!-- Add more screenshots as needed -->
       </div>
     </section>
@@ -68,6 +74,8 @@
   <footer class="footer">
     <!-- ... Footer content ... -->
   </footer>
+
+  <script src="main.js"></script>
 
 </body>
 </html>
