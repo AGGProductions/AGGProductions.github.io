@@ -1,7 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-    <body>
-        <h1>Rhythm Rampage Levels Homepage</h1>
-        <p>This page is under construction</p>
-    </body>
+<html>
+<head>
+  <title>Firebase Authentication with Google Sign-In</title>
+</head>
+<body>
+  <h1>Firebase Authentication</h1>
+
+  <div id="firebaseui-auth-container"></div>
+  <div id="user-details-container" style="display:none;">
+    <p>Welcome, <span id="user-display-name"></span>!</p>
+    <button onclick="signOut()">Sign Out</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
+
+  <script>
+    // Initialize Firebase with your project configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmRONcdCWajDN20xtXxiC9xIKXi5tTJtg",
+      authDomain: "rhythm-rampage.firebaseapp.com",
+      projectId: "rhythm-rampage",
+      // Add other necessary config parameters
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // FirebaseUI config
+    const uiConfig = {
+      signInSuccessUrl: '/',
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+      // Additional config if needed
+    };
+
+    // Initialize the FirebaseUI Widget using Firebase.
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+    // Set up an observer to check if the user is signed in or not.
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        document.getElementById('firebaseui-auth-container').style.display = 'none';
+        document.getElementById('user-details-container').style.display = 'block';
+        document.getElementById('user-display-name').innerText = user.displayName;
+      } else {
+        // User is signed out.
+        document.getElementById('firebaseui-auth-container').style.display = 'block';
+        document.getElementById('user-details-container').style.display = 'none';
+      }
+    });
+
+    function signOut() {
+      firebase.auth().signOut();
+    }
+  </script>
+</body>
 </html>
