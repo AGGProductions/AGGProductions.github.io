@@ -1,81 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Produce Panic" property="og:title" />
-  <meta content="Catch falling fruits and veggies to score points and survive as long as you can!" property="og:description" />
-  <meta content="https://aggproductions.github.io/produce-panic/" property="og:url" />
-  <meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/img/card/producepanic.png?raw=true" property="og:image" />
-  <title>Produce Panic</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-  <!-- Include the header section here (similar to index.html) -->
-  <header class="header">
-    <h1 class="logo">AGG Productions</h1>
-    <nav class="nav">
-      <ul>
-        <li><a href="../">Home</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Main content specific to the Produce Panic game -->
-  <main>
-    <h2 class="center">Produce Panic</h2>
-
-    <section class="game-embed">
-      <!-- Add a placeholder image and a button to run the game -->
-      <div class="placeholder" id="placeholder">
-        <img src="img/img1.jpg" alt="Screenshot 1">
-        <button class="btn" onclick="loadIframe()">Run Game</button>
-      </div>
-    
-      <!-- The actual iframe (hidden initially) -->
-      <iframe id="game-iframe" style="display:none;" allowfullscreen="" width="854" height="500" frameborder="0" src=""></iframe>
-    </section>
-
-    <!-- Download Link to itch.io Page -->
-    <section class="game-link">
-      <a href="https://awesomegamergame.itch.io/produce-panic/purchase" class="btn">Download for PC</a>
-      <a href="https://play.google.com/store/apps/details?id=com.AGGProductions.ProducePanic&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" class="google-play-btn"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
-    </section>
-
-    <section class="game-details">
-      <h3>Description</h3>
-      <p>Get ready for a Produce Panic! 
-        <br> <br>
-        In this fast-paced and addictive 2D game, your goal is to catch as many fruits and vegetables as possible as they rain down from the sky. 
-        <br> <br>
-        Use your basket to catch the produce before it hits the ground, but be careful not to drop any or you'll lose a life.
-        <br> <br>
-        With three lives at your disposal, see how long you can survive as the produce rain down faster and faster. 
-        <br> <br>
-        With simple one-touch controls and colorful graphics, Produce Panic is the perfect game to pass the time and challenge your reflexes. 
-        <br> <br>
-        So what are you waiting for? Let the produce rain down and see how many points you can score!</p>
-    </section>
-
-    <section class="game-screenshots">
-      <h3>Screenshots</h3>
-      <div class="screenshots">
-        <img src="img/img1.jpg" draggable="false" alt="Screenshot 1">
-        <img src="img/img2.jpg" draggable="false" alt="Screenshot 2">
-        <!-- Add more screenshots as needed -->
-      </div>
-    </section>
-
-    <!-- Add any other sections as needed for the game page --> 
-  </main>
-
-  <!-- Include the footer section here (similar to index.html) -->
-  <footer class="footer">
-    <!-- ... Footer content ... -->
-  </footer>
-
-  <script src="main.js"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Produce Panic" property="og:title" />
+    <meta content="Catch falling fruits and veggies to score points and survive as long as you can!" property="og:description" />
+    <meta content="https://aggproductions.github.io/produce-panic/" property="og:url" />
+    <meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/img/card/producepanic.png?raw=true" property="og:image" />
+    <title>Produce Panic</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Include the header section here (similar to index.html) -->
+    <header class="header">
+      <h1 class="logo">AGG Productions</h1>
+      <nav class="nav">
+        <ul>
+          <li><a href="../">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Main content specific to the Produce Panic game -->
+    <main>
+      <h2 class="center">Produce Panic</h2>
+      <section class="game-embed">
+        <!-- Add a placeholder image and a button to run the game -->
+        <div class="placeholder" id="placeholder">
+          <img src="img/img1.jpg" alt="Screenshot 1">
+          <button class="btn" onclick="loadIframe()">Run Game</button>
+        </div>
+        <!-- The actual iframe (hidden initially) -->
+        <iframe id="game-iframe" style="display:none;" allowfullscreen="" width="854" height="500" frameborder="0" src=""></iframe>
+      </section>
+      <!-- Download Link to itch.io Page -->
+      <section class="game-link">
+        <a href="https://awesomegamergame.itch.io/produce-panic/purchase" class="btn">Download for PC</a>
+        <a href="https://play.google.com/store/apps/details?id=com.AGGProductions.ProducePanic&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1" class="google-play-btn"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"></a>
+      </section>
+      <section class="game-details">
+        <h3>Description</h3>
+        <p>Get ready for a Produce Panic! 
+          <br> <br>
+          In this fast-paced and addictive 2D game, your goal is to catch as many fruits and vegetables as possible as they rain down from the sky. 
+          <br> <br>
+          Use your basket to catch the produce before it hits the ground, but be careful not to drop any or you'll lose a life.
+          <br> <br>
+          With three lives at your disposal, see how long you can survive as the produce rain down faster and faster. 
+          <br> <br>
+          With simple one-touch controls and colorful graphics, Produce Panic is the perfect game to pass the time and challenge your reflexes. 
+          <br> <br>
+          So what are you waiting for? Let the produce rain down and see how many points you can score!
+        </p>
+      </section>
+      <section class="game-screenshots">
+        <h3>Screenshots</h3>
+        <div class="screenshots">
+          <img src="img/img1.jpg" draggable="false" alt="Screenshot 1">
+          <img src="img/img2.jpg" draggable="false" alt="Screenshot 2">
+          <!-- Add more screenshots as needed -->
+        </div>
+      </section>
+      <!-- Add any other sections as needed for the game page --> 
+    </main>
+    <!-- Include the footer section here (similar to index.html) -->
+    <footer class="footer">
+      <!-- ... Footer content ... -->
+    </footer>
+    <script src="main.js"></script>
+  </body>
 </html>

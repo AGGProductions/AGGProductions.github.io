@@ -1,289 +1,220 @@
-/* General Styles */
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
+body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  line-height:1.5
 }
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px
 }
-
-h2 {
-  font-size: 30px;
-  margin-bottom: 40px;
+h2{
+  font-size:30px;
+  margin-bottom:40px
 }
-
-p {
-  font-size: 18px;
+p{
+  font-size:18px
 }
-
-/* Header */
-
-.header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header{
+  background-color:#333;
+  color:#fff;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
 }
-
-.logo {
-  font-size: 24px;
+.logo{
+  font-size:24px
 }
-
-.nav ul {
-  list-style: none;
-  display: flex;
+.nav ul{
+  list-style:none;
+  display:flex
 }
-
-.nav ul li {
-  margin-right: 20px;
+.nav ul li{
+  margin-right:20px
 }
-
-.nav ul li a {
-  color: #fff;
-  text-decoration: none;
+.nav ul li a{
+  color:#fff;
+  text-decoration:none
 }
-
-/* Hero section */
-
-.hero {
-  background-image: url('img/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  text-align: center;
-  padding: 100px 0;
+.hero{
+  background-image:url(img/hero-bg.jpg);
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  text-align:center;
+  padding:100px 0
 }
-
-.hero h2 {
-  font-size: 36px;
+.hero h2{
+  font-size:36px
 }
-
-.hero p {
-  font-size: 18px;
-  margin-bottom: 30px;
+.hero p{
+  font-size:18px;
+  margin-bottom:30px
 }
-
-.hero .btn {
-  display: inline-block;
-  background-color: #f44336;
-  color: #fff;
-  padding: 10px 30px;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 4px;
+.hero .btn{
+  display:inline-block;
+  background-color:#f44336;
+  color:#fff;
+  padding:10px 30px;
+  text-decoration:none;
+  font-size:18px;
+  border-radius:4px
 }
-
-/* About section */
-
-.about {
-  background-color: #f9f9f9;
-  padding: 80px 0;
+.about{
+  background-color:#f9f9f9;
+  padding:80px 0
 }
-
-.about p {
-  text-align: justify;
+.about p{
+  text-align:justify
 }
-
-/* Games section */
-
-.games {
-  padding: 80px 0;
-  overflow: hidden;
+.games{
+  padding:80px 0;
+  overflow:hidden
 }
-
-.game-slider {
-  position: relative;
-  margin-bottom: 20px;
-  overflow: hidden;
+.game-slider{
+  position:relative;
+  margin-bottom:20px;
+  overflow:hidden
 }
-
-.game-cards {
-  display: flex;
-  transition: transform 0.3s ease;
+.game-cards{
+  display:flex;
+  transition:transform .3s ease
 }
-
-.game-card {
-  flex: 0 0 300px;
-  margin: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  transition: transform 0.3s ease;
+.game-card{
+  flex:0 0 300px;
+  margin:20px;
+  padding:20px;
+  background-color:#f9f9f9;
+  text-align:center;
+  box-shadow:0 2px 5px rgba(0,0,0,.1);
+  border-radius:4px;
+  transition:transform .3s ease
 }
-
-.game-card .btn {
-  display: inline-block;
-  background-color: #f44336;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 4px;
+.game-card .btn{
+  display:inline-block;
+  background-color:#f44336;
+  color:#fff;
+  padding:10px 20px;
+  text-decoration:none;
+  font-size:16px;
+  border-radius:4px
 }
-
-.game-card:hover {
-  transform: scale(1.05);
+.game-card:hover{
+  transform:scale(1.05)
 }
-
-.slider-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  scroll-behavior: smooth;
+.slider-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  scroll-behavior:smooth
 }
-
-.slider-control {
-  background: transparent;
-  border: none;
-  color: #f44336;
-  font-size: 24px;
-  cursor: pointer;
-  margin: 0 10px;
+.slider-control{
+  background:0 0;
+  border:none;
+  color:#f44336;
+  font-size:24px;
+  cursor:pointer;
+  margin:0 10px
 }
-
-/* Contact section */
-
-.contact {
-  background-color: #f9f9f9;
-  padding: 80px 0;
+.contact{
+  background-color:#f9f9f9;
+  padding:80px 0
 }
-
-.contact ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.contact ul{
+  list-style:none;
+  padding:0;
+  margin:0
 }
-
-.contact ul li {
-  margin-bottom: 10px;
+.contact ul li{
+  margin-bottom:10px
 }
-
-.contact ul li a {
-  color: #333;
-  text-decoration: none;
+.contact ul li a{
+  color:#333;
+  text-decoration:none
 }
-
-/* Footer */
-
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+.footer{
+  background-color:#333;
+  color:#fff;
+  padding:20px;
+  text-align:center
 }
-
-.footer p {
-  margin: 0;
+.footer p{
+  margin:0
 }
-
-/* Custom scrollbar */
-
-::-webkit-scrollbar {
-  width: 8px;
+::-webkit-scrollbar{
+  width:8px
 }
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+::-webkit-scrollbar-track{
+  background:#f1f1f1
 }
-
-::-webkit-scrollbar-thumb {
-  background: #888;
+::-webkit-scrollbar-thumb{
+  background:#888
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+::-webkit-scrollbar-thumb:hover{
+  background:#555
 }
-
-/* Firefox scrollbar */
-
-/* Customize the scroll bar for non-WebKit-based browsers (Firefox) */
-/* Firefox 64 and later */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+html{
+  scrollbar-width:thin;
+  scrollbar-color:#888 #f1f1f1
 }
-
-/* Older Firefox versions */
-html {
-  scrollbar-face-color: #888;
-  scrollbar-track-color: #f1f1f1;
+html{
+  scrollbar-face-color:#888;
+  scrollbar-track-color:#f1f1f1
 }
-
-/* Media queries */
-
-@media screen and (max-width: 767px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+@media screen and (max-width:767px){
+  .header{
+      flex-direction:column;
+      align-items:center;
+      text-align:center
   }
-
-  .nav ul {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    padding-left: 0px;
+  .nav ul{
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      margin-top:10px;
+      padding-left:0
   }
-
-  .nav ul li {
-    margin-right: 0;
-    margin-bottom: 10px;
+  .nav ul li{
+      margin-right:0;
+      margin-bottom:10px
   }
-
-  .hero h2 {
-    font-size: 28px;
+  .hero h2{
+      font-size:28px
   }
-
-  .hero p {
-    font-size: 16px;
-    margin-bottom: 20px;
+  .hero p{
+      font-size:16px;
+      margin-bottom:20px
   }
-
-  .hero .btn {
-    font-size: 16px;
+  .hero .btn{
+      font-size:16px
   }
-
-  .about p {
-    text-align: center;
+  .about p{
+      text-align:center
   }
-
-  .game-card {
-    flex: 0 0 calc(100% - 60px);
-    max-width: calc(100% - 60px);
-    margin: 0 30px 10px 10px
+  .game-card{
+      flex:0 0 calc(100% - 60px);
+      max-width:calc(100% - 60px);
+      margin:0 30px 10px 10px
   }
-
-  .game-card img {
-    max-width: 100%;
-    height: auto;
+  .game-card img{
+      max-width:100%;
+      height:auto
   }
-
-  .game-card .btn {
-    display: inline-block;
-    background-color: #f44336;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 4px;
+  .game-card .btn{
+      display:inline-block;
+      background-color:#f44336;
+      color:#fff;
+      padding:10px 20px;
+      text-decoration:none;
+      font-size:16px;
+      border-radius:4px
   }
-
-  .game-card:hover {
-    transform: scale(1.05);
+  .game-card:hover{
+      transform:scale(1.05)
   }
-  
-  .contact ul li a {
-  word-wrap: break-word;
+  .contact ul li a{
+      word-wrap:break-word
   }
 }
