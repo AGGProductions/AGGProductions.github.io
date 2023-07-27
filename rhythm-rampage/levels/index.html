@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Firebase Authentication with Google Sign-In</title>
+  <title>Firebase Google Auth Example</title>
 </head>
 <body>
-  <h1>Firebase Authentication</h1>
-
-  <div id="firebaseui-auth-container"></div>
-  <div id="user-details-container" style="display:none;">
-    <p>Welcome, <span id="user-display-name"></span>!</p>
-    <button onclick="signOut()">Sign Out</button>
+  <h1 id="welcomeMessage">Welcome!</h1>
+  <div id="loginSection">
+    <button id="loginBtn">Log In with Google</button>
+  </div>
+  <div id="logoutSection" style="display: none;">
+    <button id="logoutBtn">Log Out</button>
   </div>
 
+  <!-- Add Firebase and Firebase Auth SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
 
+  <!-- Replace YOUR_FIREBASE_CONFIG with your actual Firebase config -->
   <script>
-    // Initialize Firebase with your project configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCmRONcdCWajDN20xtXxiC9xIKXi5tTJtg",
-      authDomain: "rhythm-rampage.firebaseapp.com",
-      projectId: "rhythm-rampage",
-      // Add other necessary config parameters
+      apiKey: "AIzaSyBYbrgUSUy1s8k6giR5ecyCi3borCEUY5Q",
+      authDomain: "rhythm-rampage-2c06c.firebaseapp.com",
+      projectId: "rhythm-rampage-2c06c",
+      storageBucket: "rhythm-rampage-2c06c.appspot.com",
+      messagingSenderId: "243807481078",
+      appId: "1:243807481078:web:d255ed764b64000d32d0d7"
     };
+
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // FirebaseUI config
-    const uiConfig = {
-      signInSuccessUrl: '/',
-      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-      // Additional config if needed
-    };
+    // Get references to the login/logout buttons and welcome message
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const welcomeMessage = document.getElementById("welcomeMessage");
 
-    // Initialize the FirebaseUI Widget using Firebase.
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-
-    // Set up an observer to check if the user is signed in or not.
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        document.getElementById('firebaseui-auth-container').style.display = 'none';
-        document.getElementById('user-details-container').style.display = 'block';
-        document.getElementById('user-display-name').innerText = user.displayName;
-      } else {
-        // User is signed out.
-        document.getElementById('firebaseui-auth-container').style.display = 'block';
-        document.getElementById('user-details-container').style.display = 'none';
-      }
+    // Handle login button click
+    loginBtn.addEventListener("click", () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider);
     });
 
-    function signOut() {
+    // Handle logout button click
+    logoutBtn.addEventListener("click", () => {
       firebase.auth().signOut();
-    }
+    });
+
+    // Firebase authentication state change listener
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        welcomeMessage.textContent = `Welcome, ${user.displayName}!`;
+        loginSection.style.display = "none";
+        logoutSection.style.display = "block";
+      } else {
+        // User is signed out
+        welcomeMessage.textContent = "Welcome!";
+        loginSection.style.display = "block";
+        logoutSection.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
