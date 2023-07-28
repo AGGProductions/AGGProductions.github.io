@@ -1,65 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Firebase Google Auth Example</title>
-</head>
-<body>
-  <h1 id="welcomeMessage">Welcome!</h1>
-  <div id="loginSection">
-    <button id="loginBtn">Log In with Google</button>
-  </div>
-  <div id="logoutSection" style="display: none;">
-    <button id="logoutBtn">Log Out</button>
-  </div>
-
-  <!-- Add Firebase and Firebase Auth SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-
-  <!-- Replace YOUR_FIREBASE_CONFIG with your actual Firebase config -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBYbrgUSUy1s8k6giR5ecyCi3borCEUY5Q",
-      authDomain: "rhythm-rampage-2c06c.firebaseapp.com",
-      projectId: "rhythm-rampage-2c06c",
-      storageBucket: "rhythm-rampage-2c06c.appspot.com",
-      messagingSenderId: "243807481078",
-      appId: "1:243807481078:web:d255ed764b64000d32d0d7"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Get references to the login/logout buttons and welcome message
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const welcomeMessage = document.getElementById("welcomeMessage");
-
-    // Handle login button click
-    loginBtn.addEventListener("click", () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithPopup(provider);
-    });
-
-    // Handle logout button click
-    logoutBtn.addEventListener("click", () => {
-      firebase.auth().signOut();
-    });
-
-    // Firebase authentication state change listener
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        welcomeMessage.textContent = `Welcome, ${user.displayName}!`;
-        loginSection.style.display = "none";
-        logoutSection.style.display = "block";
-      } else {
-        // User is signed out
-        welcomeMessage.textContent = "Welcome!";
-        loginSection.style.display = "block";
-        logoutSection.style.display = "none";
-      }
-    });
-  </script>
-</body>
+  <head>
+    <title>Game Map Upload</title>
+    <!-- Include necessary CSS stylesheets -->
+  </head>
+  <body>
+    <div id="login-container">
+      <h1>Login</h1>
+      <button onclick="loginWithGoogle()">Login with Google</button>
+    </div>
+    <div id="app-container" style="display: none;">
+      <h1>Welcome, <span id="display-name"></span>!</h1>
+      <div>
+        <img src="" alt="Profile Picture" id="profile-picture">
+        <p>Email: <span id="email"></span></p>
+      </div>
+      <h1>Upload Game Map</h1>
+      <form id="upload-form">
+        <label for="song-name">Song Name:</label>
+        <input type="text" id="song-name" required>
+        <label for="artist">Artist:</label>
+        <input type="text" id="artist" required>
+        <label for="map-file">Upload Map (ZIP file):</label>
+        <input type="file" id="map-file" required>
+        <button type="submit">Upload</button>
+        <button onclick="logout()">Logout</button>
+      </form>
+    </div>
+    <div>
+      <h2>Uploaded Maps:</h2>
+      <div id="map-list">
+        <!-- This section will be populated with the list of uploaded maps -->
+      </div>
+    </div>
+    <!-- Include necessary JavaScript libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
