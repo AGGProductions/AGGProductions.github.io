@@ -90,6 +90,7 @@ uploadForm.addEventListener('submit', e => {
           songName,
           artist,
           uploader: firebase.auth().currentUser.displayName,
+          uploaderUID: firebase.auth().currentUser.uid,
           downloadURL,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           songNameLower, // Store case-insensitive and punctuation-free versions
