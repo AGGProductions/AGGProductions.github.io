@@ -59,7 +59,7 @@ function showUserProfile(user) {
   displayName.textContent = user.displayName;
 }
   
-  // Handle form submission for uploading maps
+// Handle form submission for uploading maps
 const uploadForm = document.getElementById('upload-form');
 uploadForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -73,9 +73,12 @@ uploadForm.addEventListener('submit', e => {
   const artistLower = artist.toLowerCase().replace(/[^\w\s]/g, '');
   const uploaderLower = firebase.auth().currentUser.displayName.toLowerCase().replace(/[^\w\s]/g, '');
 
+  // Generate a unique ID for the map
+  const mapId = generateMapId();
+
   // Upload the map file to Firebase Storage
   const storageRef = firebase.storage().ref();
-  const mapFileRef = storageRef.child(`maps/${mapFile.name}`);
+  const mapFileRef = storageRef.child(`maps/${mapId}`); // Use the generated mapId as the file name
   mapFileRef
     .put(mapFile)
     .then(snapshot => {
@@ -86,7 +89,8 @@ uploadForm.addEventListener('submit', e => {
       // Save map details (song name, artist, uploader, download link) to Firestore
       const db = firebase.firestore();
       db.collection('maps')
-        .add({
+        .doc(mapId) // Use the generated mapId as the document ID
+        .set({
           songName,
           artist,
           uploader: firebase.auth().currentUser.displayName,
@@ -111,6 +115,11 @@ uploadForm.addEventListener('submit', e => {
     });
 });
 
+// Function to generate a unique ID for the map
+function generateMapId() {
+  return firebase.firestore().collection('maps').doc().id;
+}
+
 // Fetch and display the list of uploaded maps from Firestore
 function displayUploadedMaps() {
   const db = firebase.firestore();
@@ -120,20 +129,54 @@ function displayUploadedMaps() {
     .onSnapshot(snapshot => {
       const mapList = document.getElementById('map-list');
       mapList.innerHTML = '';
-      snapshot.forEach(doc => {
-        const mapData = doc.data();
-        const mapItem = document.createElement('div');
-        mapItem.innerHTML = `
-          <p><strong>Uploader:</strong> ${mapData.uploader}</p>
-          <p><strong>Song Name:</strong> ${mapData.songName}</p>
-          <p><strong>Artist:</strong> ${mapData.artist}</p>
-          <a href="${mapData.downloadURL}" download>Download Map</a>
-          <hr>
-        `;
-        mapList.appendChild(mapItem);
-      });
+      // Get the current user's UID
+  // Check if the user is signed in before accessing the UID
+  const currentUser = firebase.auth().currentUser;
+  const currentUserUid = currentUser ? currentUser.uid : null;
+
+  snapshot.forEach(doc => {
+    const mapData = doc.data();
+    const mapItem = document.createElement('div');
+    mapItem.innerHTML = `
+      <p><strong>Uploader:</strong> ${mapData.uploader}</p>
+      <p><strong>Song Name:</strong> ${mapData.songName}</p>
+      <p><strong>Artist:</strong> ${mapData.artist}</p>
+      <a href="${mapData.downloadURL}" download>Download Map</a>
+      ${
+        // Show the "Delete" button only if the current user is the uploader and is signed in
+        currentUserUid && mapData.uploaderUID === currentUserUid
+          ? `<button onclick="deleteMap('${doc.id}')">Delete</button>`
+          : ''
+      }
+      <hr>
+    `;
+    mapList.appendChild(mapItem);
+  });
     }, error => {
       console.error('Error fetching uploaded maps:', error);
+    });
+}
+
+function deleteMap(docId) {
+  const db = firebase.firestore();
+  const storageRef = firebase.storage().ref();
+
+  // Delete the map data from Firestore
+  db.collection('maps')
+    .doc(docId) // Use the document ID instead of map ID
+    .delete()
+    .then(() => {
+      console.log('Map data successfully deleted from Firestore.');
+      // Now delete the associated file from Firebase Storage
+      return storageRef.child(`maps/${docId}`).delete(); // Use the document ID instead of map ID
+    })
+    .then(() => {
+      console.log('Map file successfully deleted from Firebase Storage.');
+      // Refresh the displayed map list after successful deletion
+      displayUploadedMaps();
+    })
+    .catch(error => {
+      console.error('Error deleting map:', error);
     });
 }
 
