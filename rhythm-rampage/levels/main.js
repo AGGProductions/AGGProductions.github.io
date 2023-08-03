@@ -56,7 +56,7 @@ firebase.auth().onAuthStateChanged(user => {
 		document.getElementById('app-container').style.display = 'none';
 		document.getElementById('upload-button').style.display = 'none';
 		document.getElementById('user-info').style.display = 'none';
-		if (document.getElementById('upload-container').style.display = 'block'); {
+		if (document.getElementById('upload-container').style.display == "block") {
 			document.getElementById('upload-container').style.display = 'none';
 			document.getElementById('home-container').style.display = 'block';
 		}
