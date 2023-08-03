@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <!--<meta name="description" content="AGG Productions is a game development studio founded by awesomegamergame.">
-    <meta content="AGG Productions" property="og:title" />
-    <meta content="AGG Productions is a game development studio founded by awesomegamergame." property="og:description" />
-    <meta content="https://aggproductions.github.io/" property="og:url" />
-    <meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/AGG_Productions.png?raw=true" property="og:image" />-->
+    <meta name="description" content="Rhythm Rampage custom levels webpage">
+    <meta content="Rhythm Rampage Custom" property="og:title" />
+    <meta content="Rhythm Rampage custom levels webpage" property="og:description" />
+    <meta content="https://aggproductions.github.io/rhythm-rampage/levels/" property="og:url" />
+    <!--<meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/AGG_Productions.png?raw=true" property="og:image" />-->
     <title>Custom Levels</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+
     <header class="header">
       <h1 class="logo">Rhythm Rampage</h1>
       <nav class="nav">
         <ul>
           <li><button onclick="home();">Home</button></li>
-          <li><button>Search</button></li>
+          <li><button onclick="search()">Search</button></li>
           <li><button id="upload-button" onclick="upload()" style="display: none;">Upload</button></li>
           <li>
             <div id="user-info" style="display: none;">
@@ -37,16 +38,16 @@
           </li>
         </ul>
       </nav>
-            
     </header>
 
     <section id="home-container">
-      <h2>Uploaded Maps:</h2>
+      <h1>
+      Uploaded Maps:</h2>
       <div id="map-list">
         <!-- This section will be populated with the list of uploaded maps -->
       </div>
     </section>
-    
+
     <section id="upload-container" style="display: none;">
       <h1>Upload Game Map</h1>
       <form id="upload-form">
@@ -57,31 +58,33 @@
         <label for="map-file">Upload Map (ZIP file):</label>
         <input type="file" id="map-file" required>
         <button type="submit">Upload</button>
-        <button onclick="logout()">Logout</button>
       </form>
     </section>
 
-    <div style="display: none;">
-      <h2>Search Uploaded Maps:</h2>
-      <form id="search-form">
-        <label for="search-input">Search:</label>
-        <input type="text" id="search-input" placeholder="Search by song, artist, or uploader">
-        <select id="search-criteria">
-          <option value="songName">Song Name</option>
-          <option value="artist">Artist</option>
-          <option value="uploader">Uploader</option>
-        </select>
-        <button type="submit">Search</button>
-      </form>
-    </div>
-    <div style="display: none;">
-      <h2>Search Results:</h2>
-      <div id="search-results">
-        <!-- This section will be populated with the search results -->
+    <section id="search-container" style="display: none;">
+      <div>
+        <h1>
+        Search Uploaded Maps:</h2>
+        <form id="search-form">
+          <label for="search-input">Search:</label>
+          <input type="text" id="search-input" placeholder="Search by song, artist, or uploader">
+          <select id="search-criteria">
+            <option value="songName">Song Name</option>
+            <option value="artist">Artist</option>
+            <option value="uploader">Uploader</option>
+          </select>
+          <button type="submit">Search</button>
+        </form>
       </div>
-    </div>   
-    
-    
+      <div>
+        <h1>
+        Search Results:</h2>
+        <div id="search-results">
+          <!-- This section will be populated with the search results -->
+        </div>
+      </div>
+    </section>
+
     <!-- Include necessary JavaScript libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
