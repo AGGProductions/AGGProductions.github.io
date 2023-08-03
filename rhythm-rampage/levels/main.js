@@ -216,26 +216,32 @@ function searchMaps(searchInput, searchCriteria) {
 		.get()
 		.then(snapshot => {
 				const searchResults = document.getElementById('search-results');
+				const noResultsMessage = document.getElementById('no-results-message');
 				searchResults.innerHTML = '';
+				noResultsMessage.style.display = 'none'; // Hide the message initially
 
 				const currentUser = firebase.auth().currentUser;
 				const currentUserUid = currentUser ? currentUser.uid : null;
-
-				snapshot.forEach(doc => {
-          const mapData = doc.data();
-          const mapItem = document.createElement('div');
-          mapItem.innerHTML = `
-          <p><strong>Song Name:</strong> ${mapData.songName}</p>
-          <p><strong>Artist:</strong> ${mapData.artist}</p>
-		  <p><strong>Uploader:</strong> ${mapData.uploader}</p>
-          <a href="${mapData.downloadURL}" download>Download Map</a>
-          ${
-            // Show the "Delete" button only if the current user is the uploader and is signed in
-            currentUserUid && mapData.uploaderUID === currentUserUid
-            ? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`: ''
-          }`;
-        searchResults.appendChild(mapItem);
-      });
+				if (snapshot.empty) {
+					noResultsMessage.style.display = 'block'; // Show the message if no results are found
+				}
+				else {
+					snapshot.forEach(doc => {
+				const mapData = doc.data();
+				const mapItem = document.createElement('div');
+				mapItem.innerHTML = `
+				<p><strong>Song Name:</strong> ${mapData.songName}</p>
+				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
+				<a href="${mapData.downloadURL}" download>Download Map</a>
+				${
+				// Show the "Delete" button only if the current user is the uploader and is signed in
+				currentUserUid && mapData.uploaderUID === currentUserUid
+				? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`: ''
+				}`;
+			searchResults.appendChild(mapItem);
+			});
+		}
     })
     .catch(error => {
       console.error('Error fetching search results:', error);
