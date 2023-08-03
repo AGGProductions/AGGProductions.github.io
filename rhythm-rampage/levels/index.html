@@ -16,9 +16,9 @@
       <h1 class="logo">Rhythm Rampage</h1>
       <nav class="nav">
         <ul>
-          <li><button>Home</button></li>
+          <li><button onclick="home();">Home</button></li>
           <li><button>Search</button></li>
-          <li><button>Upload</button></li>
+          <li><button id="upload-button" onclick="upload()" style="display: none;">Upload</button></li>
           <li>
             <div id="user-info" style="display: none;">
               <img src="" alt="Profile Picture" id="profile-picture">
@@ -39,8 +39,15 @@
       </nav>
             
     </header>
+
+    <section id="home-container">
+      <h2>Uploaded Maps:</h2>
+      <div id="map-list">
+        <!-- This section will be populated with the list of uploaded maps -->
+      </div>
+    </section>
     
-    <div id="upload-container" style="display: none;">
+    <section id="upload-container" style="display: none;">
       <h1>Upload Game Map</h1>
       <form id="upload-form">
         <label for="song-name">Song Name:</label>
@@ -52,8 +59,9 @@
         <button type="submit">Upload</button>
         <button onclick="logout()">Logout</button>
       </form>
-    </div>
-    <div>
+    </section>
+
+    <div style="display: none;">
       <h2>Search Uploaded Maps:</h2>
       <form id="search-form">
         <label for="search-input">Search:</label>
@@ -66,18 +74,14 @@
         <button type="submit">Search</button>
       </form>
     </div>
-    <div>
+    <div style="display: none;">
       <h2>Search Results:</h2>
       <div id="search-results">
         <!-- This section will be populated with the search results -->
       </div>
-    </div>        
-    <div>
-      <h2>Uploaded Maps:</h2>
-      <div id="map-list">
-        <!-- This section will be populated with the list of uploaded maps -->
-      </div>
-    </div>
+    </div>   
+    
+    
     <!-- Include necessary JavaScript libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>

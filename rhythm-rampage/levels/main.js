@@ -39,15 +39,19 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     document.getElementById('login-container').style.display = 'none';
     document.getElementById('app-container').style.display = 'block';
-    document.getElementById('upload-container').style.display = 'block';
+    document.getElementById('upload-button').style.display = 'inline-block';
     document.getElementById('user-info').style.display = 'flex'; // Show user info
-    displayUploadedMaps();
     showUserProfile(user);
   } else {
     document.getElementById('login-container').style.display = 'block';
     document.getElementById('app-container').style.display = 'none';
-    document.getElementById('upload-container').style.display = 'none';
+    document.getElementById('upload-button').style.display = 'none';
     document.getElementById('user-info').style.display = 'none';
+    if(document.getElementById('upload-container').style.display = 'block');
+    {
+      document.getElementById('upload-container').style.display = 'none';
+      document.getElementById('home-container').style.display = 'block';
+    }
   }
 
   displayUploadedMaps();
@@ -60,6 +64,15 @@ function showUserProfile(user) {
 
   profilePicture.src = user.photoURL;
   displayName.textContent = user.displayName;
+}
+
+function upload() {
+  document.getElementById('upload-container').style.display = 'block';
+  document.getElementById('home-container').style.display = 'none';
+}
+function home() {
+  document.getElementById('upload-container').style.display = 'none';
+  document.getElementById('home-container').style.display = 'block';
 }
   
 // Handle form submission for uploading maps
