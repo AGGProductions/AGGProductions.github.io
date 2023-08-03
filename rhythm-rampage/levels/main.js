@@ -39,11 +39,15 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     document.getElementById('login-container').style.display = 'none';
     document.getElementById('app-container').style.display = 'block';
+    document.getElementById('upload-container').style.display = 'block';
+    document.getElementById('user-info').style.display = 'flex'; // Show user info
     displayUploadedMaps();
     showUserProfile(user);
   } else {
     document.getElementById('login-container').style.display = 'block';
     document.getElementById('app-container').style.display = 'none';
+    document.getElementById('upload-container').style.display = 'none';
+    document.getElementById('user-info').style.display = 'none';
   }
 
   displayUploadedMaps();
@@ -53,7 +57,6 @@ firebase.auth().onAuthStateChanged(user => {
 function showUserProfile(user) {
   const profilePicture = document.getElementById('profile-picture');
   const displayName = document.getElementById('display-name');
-  const email = document.getElementById('email');
 
   profilePicture.src = user.photoURL;
   displayName.textContent = user.displayName;
