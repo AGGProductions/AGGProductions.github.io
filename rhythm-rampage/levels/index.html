@@ -9,14 +9,19 @@
     <meta content="https://aggproductions.github.io/rhythm-rampage/levels/" property="og:url" />
     <!--<meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/AGG_Productions.png?raw=true" property="og:image" />-->
     <title>Custom Levels</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="styles/search.css">
   </head>
   <body>
 
     <header class="header">
-      <h1 class="logo">Rhythm Rampage</h1>
+      <div style="display: flex;">
+        <h1 class="logo">Rhythm Rampage</h1>
+        <div class="menu-button">&#9776;</div>
+      </div>
       <nav class="nav">
-        <ul>
+        <ul class="nav-items">
           <li><button onclick="home();">Home</button></li>
           <li><button onclick="search()">Search</button></li>
           <li><button id="upload-button" onclick="upload()" style="display: none;">Upload</button></li>
@@ -41,8 +46,7 @@
     </header>
 
     <section id="home-container">
-      <h1>
-      Uploaded Maps:</h2>
+      <h1>Newest Maps</h2>
       <div id="map-list">
         <!-- This section will be populated with the list of uploaded maps -->
       </div>
@@ -66,7 +70,6 @@
         <h1>
         Search Uploaded Maps:</h2>
         <form id="search-form">
-          <label for="search-input">Search:</label>
           <input type="text" id="search-input" placeholder="Search by song, artist, or uploader">
           <select id="search-criteria">
             <option value="songName">Song Name</option>

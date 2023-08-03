@@ -34,6 +34,15 @@ function logout() {
 		});
 }
 
+//Hamburger Menu
+const menuButton = document.querySelector('.menu-button');
+const navItems = document.querySelector('.nav-items');
+      
+menuButton.addEventListener('click', function () {
+    // Toggle the 'show-menu' class on the header element
+    document.querySelector('.header').classList.toggle('show-menu');
+});
+
 // Check the user's authentication state and show/hide content accordingly
 firebase.auth().onAuthStateChanged(user => {
 	if (user) {
@@ -66,18 +75,21 @@ function showUserProfile(user) {
 }
 
 function upload() {
+	document.querySelector('.header').classList.toggle('show-menu');
 	document.getElementById('upload-container').style.display = 'block';
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'none';
 }
 
 function home() {
+	document.querySelector('.header').classList.toggle('show-menu');
 	document.getElementById('upload-container').style.display = 'none';
 	document.getElementById('home-container').style.display = 'block';
 	document.getElementById('search-container').style.display = 'none';
 }
 
 function search() {
+	document.querySelector('.header').classList.toggle('show-menu');
 	document.getElementById('upload-container').style.display = 'none';
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'block';
@@ -157,11 +169,10 @@ function displayUploadedMaps() {
 				const mapData = doc.data();
 				const mapItem = document.createElement('div');
 				mapItem.innerHTML = `
-        <p><strong>Uploader:</strong> ${mapData.uploader}</p>
-        <p><strong>Song Name:</strong> ${mapData.songName}</p>
-        <p><strong>Artist:</strong> ${mapData.artist}</p>
-        <a href="${mapData.downloadURL}" download>Download Map</a>
-        <hr>`;
+        		<p><strong>Song Name:</strong> ${mapData.songName}</p>
+        		<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
+        		<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>`;
 				mapList.appendChild(mapItem);
 			});
 		}, error => {
@@ -214,16 +225,15 @@ function searchMaps(searchInput, searchCriteria) {
           const mapData = doc.data();
           const mapItem = document.createElement('div');
           mapItem.innerHTML = `
-          <p><strong>Uploader:</strong> ${mapData.uploader}</p>
           <p><strong>Song Name:</strong> ${mapData.songName}</p>
           <p><strong>Artist:</strong> ${mapData.artist}</p>
+		  <p><strong>Uploader:</strong> ${mapData.uploader}</p>
           <a href="${mapData.downloadURL}" download>Download Map</a>
           ${
             // Show the "Delete" button only if the current user is the uploader and is signed in
             currentUserUid && mapData.uploaderUID === currentUserUid
             ? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`: ''
-          }
-          <hr>`;
+          }`;
         searchResults.appendChild(mapItem);
       });
     })
