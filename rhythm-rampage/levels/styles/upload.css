@@ -1,0 +1,116 @@
+#upload-container {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  
+  #upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #upload-form label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  #song-name,
+  #artist,
+  #map-file {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  #song-name:focus,
+  #artist:focus,
+  #map-file:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  #upload-form button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  #upload-form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  #map-file-container {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  #map-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  #map-file-label:hover {
+    background-color: #45a049;
+  }
+  
+  #map-file {
+    display: none;
+  }
+
+  #uploaded-file-name {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  #map-file-info {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  #map-file-info span {
+    color: #ff3333;
+  } 
+  /* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+    #upload-container {
+      padding: 0 10px; /* Adjust padding for smaller screens */
+    }
+  
+    #upload-form label,
+    #song-name,
+    #artist,
+    #map-file,
+    #upload-form button[type="submit"],
+    #map-file-label {
+      font-size: 14px; /* Reduce font size for smaller screens */
+    }
+    
+    #song-name,
+    #artist,
+    #map-file {
+      padding: 8px; /* Slightly reduce padding for smaller screens */
+    }
+    
+    #map-file-label {
+      padding: 8px 15px; /* Slightly reduce padding for smaller screens */
+    }
+  }

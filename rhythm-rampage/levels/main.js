@@ -262,3 +262,20 @@ searchForm.addEventListener('submit', e => {
 
   searchMaps(searchInput, searchCriteria); // Call the search function with the input
 });
+
+function updateFile(input) {
+
+	if (input.files && input.files[0].size > (5 * 1024)) {
+        alert("File too large. Max 5KB allowed.");
+        input.value = null;
+    }
+
+	const fileInput = document.getElementById("map-file");
+	const fileNameDisplay = document.getElementById("uploaded-file-name");
+  
+	if (fileInput.files.length > 0) {
+	  fileNameDisplay.textContent = fileInput.files[0].name;
+	} else {
+	  fileNameDisplay.textContent = "(No file chosen)";
+	}
+}

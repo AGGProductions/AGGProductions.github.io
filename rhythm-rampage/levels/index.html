@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/search.css">
+    <link rel="stylesheet" href="styles/upload.css">
   </head>
   <body>
 
@@ -59,8 +60,12 @@
         <input type="text" id="song-name" required>
         <label for="artist">Artist:</label>
         <input type="text" id="artist" required>
-        <label for="map-file">Upload Map (ZIP file):</label>
-        <input type="file" id="map-file" required>
+        <div id="map-file-container">
+          <label for="map-file" id="map-file-label">Choose Map File</label>
+          <input type="file" id="map-file" required onchange="updateFile(this)">
+          <div id="uploaded-file-name">(No file chosen)</div>
+          <div id="map-file-info">(Accepted file types: .zip)<br><span>Maximum file size: 5KB</span></div>
+        </div>
         <button type="submit">Upload</button>
       </form>
     </section>
