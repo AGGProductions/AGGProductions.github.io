@@ -204,63 +204,107 @@ function deleteMap(docId, mapItem) {
 		});
 }
 
+let searchQuery; // Declare a global variable to store the search query
+let currentLimit = 5; // Initialize the limit for the initial search
+
 // Fetch and display the list of uploaded maps from Firestore based on search input
-function searchMaps(searchInput, searchCriteria) {
-	// Preprocess the search input for case-insensitive and punctuation-free search
-	const searchInputLower = searchInput.toLowerCase().replace(/[^\w\s]/g, '');
+function searchMaps(searchInput, searchCriteria, limit) {
+  const db = firebase.firestore();
+  
+  // Preprocess the search input for case-insensitive and punctuation-free search
+  const searchInputLower = searchInput.toLowerCase().replace(/[^\w\s]/g, '');
 
-	const db = firebase.firestore();
-	db.collection('maps')
-		.where(searchCriteria + 'Lower', '>=', searchInputLower)
-		.where(searchCriteria + 'Lower', '<=', searchInputLower + '\uf8ff')
-		.get()
-		.then(snapshot => {
-				const searchResults = document.getElementById('search-results');
-				const noResultsMessage = document.getElementById('no-results-message');
-				searchResults.innerHTML = '';
-				noResultsMessage.style.display = 'none'; // Hide the message initially
+  // Construct the query with the given limit
+  searchQuery = db.collection('maps')
+    .where(searchCriteria + 'Lower', '>=', searchInputLower)
+    .where(searchCriteria + 'Lower', '<=', searchInputLower + '\uf8ff')
+    .orderBy(searchCriteria + 'Lower') // Use the searchCriteria field here
+    .orderBy('timestamp', 'desc') // Add this line to maintain the timestamp ordering
+    .limit(limit);
 
-				const currentUser = firebase.auth().currentUser;
-				const currentUserUid = currentUser ? currentUser.uid : null;
-				if (snapshot.empty) {
-					noResultsMessage.style.display = 'block'; // Show the message if no results are found
-				}
-				else {
-					snapshot.forEach(doc => {
-				const mapData = doc.data();
-				const mapItem = document.createElement('div');
-				mapItem.innerHTML = `
-				<p><strong>Song Name:</strong> ${mapData.songName}</p>
-				<p><strong>Artist:</strong> ${mapData.artist}</p>
-				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
-				<a href="${mapData.downloadURL}" download>Download Map</a>
-				${
-				// Show the "Delete" button only if the current user is the uploader and is signed in
-				currentUserUid && mapData.uploaderUID === currentUserUid
-				? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`: ''
-				}`;
-			searchResults.appendChild(mapItem);
-			});
-		}
+
+  // Execute the query and return the results
+  return searchQuery.get()
+    .then(snapshot => {
+      const searchResults = document.getElementById('search-results');
+      const noResultsMessage = document.getElementById('no-results-message');
+      searchResults.innerHTML = '';
+      noResultsMessage.style.display = 'none'; // Hide the message initially
+
+      const currentUser = firebase.auth().currentUser;
+      const currentUserUid = currentUser ? currentUser.uid : null;
+      
+      if (snapshot.empty) {
+        noResultsMessage.style.display = 'block'; // Show the message if no results are found
+      } else {
+        snapshot.forEach(doc => {
+          const mapData = doc.data();
+          const mapItem = document.createElement('div');
+          mapItem.innerHTML = `
+            <p><strong>Song Name:</strong> ${mapData.songName}</p>
+            <p><strong>Artist:</strong> ${mapData.artist}</p>
+            <p><strong>Uploader:</strong> ${mapData.uploader}</p>
+            <a href="${mapData.downloadURL}" download>Download Map</a>
+            ${
+              // Show the "Delete" button only if the current user is the uploader and is signed in
+              currentUserUid && mapData.uploaderUID === currentUserUid
+                ? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>` : ''
+            }`;
+          searchResults.appendChild(mapItem);
+        });
+      }
+	  return snapshot;
     })
     .catch(error => {
       console.error('Error fetching search results:', error);
     });
 }
 
+let searchInput; // Define the searchInput variable
+let searchCriteria;
+
+const loadMoreButton = document.getElementById('load-more-button');
+loadMoreButton.addEventListener('click', () => {
+	currentLimit += 5; // Increase the limit by 5
+	searchMaps(searchInput, searchCriteria, currentLimit)
+	  .then(snapshot => {
+		// Handle loading more results
+		const numResults = snapshot.docs.length;
+		if (numResults < currentLimit) {
+		  loadMoreButton.style.display = 'none'; // Hide the "Load More" button
+		}
+	  })
+	  .catch(error => {
+		console.error('Error loading more results:', error);
+	  });
+  });
+
 const searchForm = document.getElementById('search-form');
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  const searchInput = document.getElementById('search-input').value.trim();
-  const searchCriteria = document.getElementById('search-criteria').value;
+  searchInput = document.getElementById('search-input').value.trim();
+  searchCriteria = document.getElementById('search-criteria').value;
 
   if (searchInput == '') 
     return;
+    
   const searchResults = document.getElementById('search-results');
   searchResults.innerHTML = ''; // Clear previous search results
+  currentLimit = 5; // Reset the limit for a new search
 
-  searchMaps(searchInput, searchCriteria); // Call the search function with the input
+  searchMaps(searchInput, searchCriteria, currentLimit) // Initial limit of 5 results
+    .then(snapshot => {
+      // Handle displaying the initial search results
+      if (snapshot.docs.length < currentLimit) {
+        loadMoreButton.style.display = 'none'; // Hide the "Load More" button if there are no more results
+      } else {
+        loadMoreButton.style.display = 'block'; // Display the "Load More" button
+      }
+    })
+    .catch(error => {
+      console.error('Error searching maps:', error);
+    });
 });
 
 function updateFile(input) {
