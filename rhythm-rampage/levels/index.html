@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/search.css">
     <link rel="stylesheet" href="styles/upload.css">
+    <link rel="stylesheet" href="styles/profile.css">
   </head>
   <body>
 
@@ -100,7 +101,13 @@
     </section>
 
     <section id="profile-container" style="display: none;">
-      <p>This section is under construction, to delete a map you have to search for it in search page</p>
+      <h1>Your Maps</h1>
+      <div id="your-maps-list">
+        <!-- This section will be populated with the list of maps owned by the user -->
+      </div>
+      <div id="load-more-user-maps-container">
+        <button id="load-more-user-maps-button" style="display: none;">Load More</button>
+      </div>
     </section>
 
     <!-- Include necessary JavaScript libraries -->

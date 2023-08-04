@@ -106,6 +106,7 @@ function profile() {
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'none';
 	document.getElementById('profile-container').style.display = 'block';
+	displayUserMaps(firebase.auth().currentUser.uid);
 }
 
 // Handle form submission for uploading maps
@@ -257,12 +258,7 @@ function searchMaps(searchInput, searchCriteria, limit) {
             <p><strong>Song Name:</strong> ${mapData.songName}</p>
             <p><strong>Artist:</strong> ${mapData.artist}</p>
             <p><strong>Uploader:</strong> ${mapData.uploader}</p>
-            <a href="${mapData.downloadURL}" download>Download Map</a>
-            ${
-              // Show the "Delete" button only if the current user is the uploader and is signed in
-              currentUserUid && mapData.uploaderUID === currentUserUid
-                ? `<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>` : ''
-            }`;
+            <a href="${mapData.downloadURL}" download>Download Map</a>`;
           searchResults.appendChild(mapItem);
         });
       }
@@ -336,3 +332,50 @@ function updateFile(input) {
 	  fileNameDisplay.textContent = "(No file chosen)";
 	}
 }
+
+
+function displayUserMaps(uid, limit = 5) {
+	const db = firebase.firestore();
+	
+	let query = db.collection('maps')
+	  .where('uploaderUID', '==', uid)
+	  .orderBy('timestamp', 'desc')
+	  .limit(limit);
+	
+	// Check if the query should be further limited based on the user's maps count
+	if (limit === 5) {
+	  query = query.limit(5);
+	}
+  
+	query.get()
+	  .then(snapshot => {
+		const yourMapsList = document.getElementById('your-maps-list');
+		const loadMoreButton = document.getElementById('load-more-user-maps-button');
+		
+		yourMapsList.innerHTML = '';
+		
+		snapshot.forEach(doc => {
+		  const mapData = doc.data();
+		  const mapItem = document.createElement('div');
+		  mapItem.innerHTML = `
+			<p><strong>Song Name:</strong> ${mapData.songName}</p>
+			<p><strong>Artist:</strong> ${mapData.artist}</p>
+			<a href="${mapData.downloadURL}" download>Download Map</a>
+			<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`;
+		  yourMapsList.appendChild(mapItem);
+		});
+  
+		if (snapshot.docs.length < limit) {
+		  loadMoreButton.style.display = 'none';
+		} else {
+		  loadMoreButton.style.display = 'block';
+		  loadMoreButton.addEventListener('click', () => {
+			limit += 5; // Increase the limit by 5
+			displayUserMaps(uid, limit);
+		  });
+		}
+	  })
+	  .catch(error => {
+		console.error('Error fetching user maps:', error);
+	  });
+  }

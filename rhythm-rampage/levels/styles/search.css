@@ -90,24 +90,6 @@
     border-radius: 5px;
     transition: background-color 0.2s ease-in-out;
   }
-  
-  #search-results button {
-    padding: 8px 20px;
-    line-height: 24px;
-    font-size: 15px;
-    background-color: #ff3333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  hr {
-    margin: 20px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-  }
 
   #load-more-button {
     padding: 10px 20px;
