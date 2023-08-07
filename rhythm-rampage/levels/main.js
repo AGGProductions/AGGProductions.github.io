@@ -186,10 +186,12 @@ uploadForm.addEventListener('submit', e => {
 // Fetch and display the list of uploaded maps from Firestore
 function displayUploadedMaps() {
 	const db = firebase.firestore();
+	
 	db.collection('maps')
 		.orderBy('timestamp', 'desc')
 		.limit(5)
-		.onSnapshot(snapshot => {
+		.get()
+		.then(querySnapshot => {
 			const mapList = document.getElementById('map-list');
 			mapList.innerHTML = '';
 			// Get the current user's UID
@@ -197,7 +199,7 @@ function displayUploadedMaps() {
 			const currentUser = firebase.auth().currentUser;
 			const currentUserUid = currentUser ? currentUser.uid : null;
 
-			snapshot.forEach(doc => {
+			querySnapshot.forEach(doc => {
 				const mapData = doc.data();
 				const mapItem = document.createElement('div');
 				mapItem.classList.add('map-card'); // Add a class for styling
@@ -211,7 +213,8 @@ function displayUploadedMaps() {
 				<div id="share-link-${doc.id}" class="share-link" style="display: none;"></div>`;
 				mapList.appendChild(mapItem);
 			});
-		}, error => {
+		})
+		.catch(error => {
 			console.error('Error fetching uploaded maps:', error);
 		});
 }
