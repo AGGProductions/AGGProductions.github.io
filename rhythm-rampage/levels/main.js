@@ -1,3 +1,9 @@
+// Call the function to display level details when the page loads
+window.onload = function() 
+{
+    displayLevelDetails();
+};
+
 // Your Firebase configuration
 const firebaseConfig = {
 	apiKey: "AIzaSyBYbrgUSUy1s8k6giR5ecyCi3borCEUY5Q",
@@ -77,36 +83,48 @@ function showUserProfile(user) {
 }
 
 function upload() {
-	document.querySelector('.header').classList.toggle('show-menu');
+	document.querySelector('.header').classList.remove('show-menu');
 	document.getElementById('upload-container').style.display = 'block';
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'none';
 	document.getElementById('profile-container').style.display = 'none';
+	document.getElementById('share-container').style.display = 'none';
+	const urlWithoutParams = window.location.href.split('?')[0];
+  	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 function home() {
-	document.querySelector('.header').classList.toggle('show-menu');
+	document.querySelector('.header').classList.remove('show-menu');
 	document.getElementById('upload-container').style.display = 'none';
 	document.getElementById('home-container').style.display = 'block';
 	document.getElementById('search-container').style.display = 'none';
 	document.getElementById('profile-container').style.display = 'none';
+	document.getElementById('share-container').style.display = 'none';
+	const urlWithoutParams = window.location.href.split('?')[0];
+  	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 function search() {
-	document.querySelector('.header').classList.toggle('show-menu');
+	document.querySelector('.header').classList.remove('show-menu');
 	document.getElementById('upload-container').style.display = 'none';
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'block';
 	document.getElementById('profile-container').style.display = 'none';
+	document.getElementById('share-container').style.display = 'none';
+	const urlWithoutParams = window.location.href.split('?')[0];
+	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 function profile() {
-	document.querySelector('.header').classList.toggle('show-menu');
+	document.querySelector('.header').classList.remove('show-menu');
 	document.getElementById('upload-container').style.display = 'none';
 	document.getElementById('home-container').style.display = 'none';
 	document.getElementById('search-container').style.display = 'none';
 	document.getElementById('profile-container').style.display = 'block';
+	document.getElementById('share-container').style.display = 'none';
 	displayUserMaps(firebase.auth().currentUser.uid);
+	const urlWithoutParams = window.location.href.split('?')[0];
+  	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 // Handle form submission for uploading maps
@@ -182,11 +200,15 @@ function displayUploadedMaps() {
 			snapshot.forEach(doc => {
 				const mapData = doc.data();
 				const mapItem = document.createElement('div');
-				mapItem.innerHTML = `
-        		<p><strong>Song Name:</strong> ${mapData.songName}</p>
-        		<p><strong>Artist:</strong> ${mapData.artist}</p>
-				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
-        		<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>`;
+				mapItem.classList.add('map-card'); // Add a class for styling
+    			mapItem.innerHTML = `
+				<p><strong>Song Name:</strong> ${mapData.songName}</p>
+				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>
+				<button class="share-button" onclick="shareLink('${doc.id}')">
+					<i class="fas fa-share"></i> Share
+				</button>
+				<div id="share-link-${doc.id}" class="share-link" style="display: none;"></div>`;
 				mapList.appendChild(mapItem);
 			});
 		}, error => {
@@ -254,11 +276,15 @@ function searchMaps(searchInput, searchCriteria, limit) {
         snapshot.forEach(doc => {
           const mapData = doc.data();
           const mapItem = document.createElement('div');
+		  mapItem.classList.add('map-card');
           mapItem.innerHTML = `
-            <p><strong>Song Name:</strong> ${mapData.songName}</p>
-            <p><strong>Artist:</strong> ${mapData.artist}</p>
-            <p><strong>Uploader:</strong> ${mapData.uploader}</p>
-            <a href="${mapData.downloadURL}" download>Download Map</a>`;
+				<p><strong>Song Name:</strong> ${mapData.songName}</p>
+				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>
+				<button class="share-button" onclick="shareLink('${doc.id}', 'search')">
+					<i class="fas fa-share"></i> Share
+				</button>
+				<div id="share-search-link-${doc.id}" class="share-link" style="display: none;"></div>`;
           searchResults.appendChild(mapItem);
         });
       }
@@ -357,11 +383,16 @@ function displayUserMaps(uid, limit = 5) {
 		snapshot.forEach(doc => {
 		  const mapData = doc.data();
 		  const mapItem = document.createElement('div');
+		  mapItem.classList.add('map-card');
 		  mapItem.innerHTML = `
 			<p><strong>Song Name:</strong> ${mapData.songName}</p>
 			<p><strong>Artist:</strong> ${mapData.artist}</p>
-			<a href="${mapData.downloadURL}" download>Download Map</a>
-			<button onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>`;
+			<a class="download" href="${mapData.downloadURL}" download>Download Map</a>
+			<button class="delete-button" onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>
+			<button class="share-button" onclick="shareLink('${doc.id}', 'profile')">
+				<i class="fas fa-share"></i> Share
+			</button>
+			<div id="share-profile-link-${doc.id}" class="share-link" style="display: none;"></div>`;
 		  yourMapsList.appendChild(mapItem);
 		});
   
@@ -379,3 +410,56 @@ function displayUserMaps(uid, limit = 5) {
 		console.error('Error fetching user maps:', error);
 	  });
   }
+  
+  function shareLink(mapId, page) {
+	const shareableLink = `${window.location.href}?levelid=${mapId}`;
+	var shareLinkDiv = document.getElementById(`share-link-${mapId}`);
+	switch(page)
+	{
+		case "home":	
+			shareLinkDiv = document.getElementById(`share-link-${mapId}`);
+			break;
+		case "search":
+			shareLinkDiv = document.getElementById(`share-search-link-${mapId}`);
+			break;
+		case "profile":
+			shareLinkDiv = document.getElementById(`share-profile-link-${mapId}`);
+			break;
+	}
+	shareLinkDiv.style.display = 'block';
+	shareLinkDiv.innerHTML = `Share this link: <a href="${shareableLink}">${shareableLink}</a>`;
+  }
+  
+  function displayLevelDetails() {
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const levelId = urlParams.get('levelid');
+	
+	if (levelId) 
+	{
+		document.getElementById('home-container').style.display = 'none';
+		const db = firebase.firestore();
+		const levelDetailsContainer = document.getElementById('share-container');
+		const levelDetails = document.getElementById('level-details');
+	
+		// Fetch level details using the levelId
+		db.collection('maps').doc(levelId).get()
+			.then(doc => {
+			if (doc.exists) {
+				const mapData = doc.data();
+				levelDetails.innerHTML = `
+				<p><strong>Song Name:</strong> ${mapData.songName}</p>
+				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
+				<a href="${mapData.downloadURL}" download>Download Map</a>`;
+				levelDetailsContainer.style.display = 'block'; // Display the section container
+			} else {
+				levelDetails.innerHTML = 'Level not found';
+				levelDetailsContainer.style.display = 'block'; // Display the section container
+			}
+			})
+			.catch(error => {
+			console.error('Error fetching level details:', error);
+			});
+	}
+}

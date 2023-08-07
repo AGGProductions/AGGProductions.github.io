@@ -80,16 +80,6 @@
   #search-results div:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
-  #search-results a {
-    display: inline-block;
-    padding: 8px 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.2s ease-in-out;
-  }
 
   #load-more-button {
     padding: 10px 20px;

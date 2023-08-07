@@ -23,7 +23,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#your-maps-list a {
+#your-maps-list .download {
     display: inline-block;
     padding: 8px 20px;
     background-color: #4CAF50;
@@ -33,7 +33,7 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-#your-maps-list button {
+#your-maps-list .delete-button {
     display: inline-block;
     padding: 8px 20px;
     line-height: 24px;
