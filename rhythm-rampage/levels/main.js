@@ -154,6 +154,15 @@ uploadForm.addEventListener('submit', e => {
 			return snapshot.ref.getDownloadURL();
 		})
 		.then(downloadURL => {
+
+			// Read the level.json file from the zip and extract the levelVersion
+            const jszip = new JSZip();
+            return jszip.loadAsync(mapFile).then(zip => {
+                return zip.file('level.json').async('string');
+            }).then(levelJson => {
+                const levelInfo = JSON.parse(levelJson);
+                const levelVersion = levelInfo.levelInfo.levelVersion;
+				
 			// Save map details (song name, artist, uploader, download link) to Firestore
 			const db = firebase.firestore();
 			db.collection('maps')
@@ -167,7 +176,8 @@ uploadForm.addEventListener('submit', e => {
 					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 					songNameLower, // Store case-insensitive and punctuation-free versions
 					artistLower,
-					uploaderLower
+					uploaderLower,
+					levelVersion
 				})
 				.then(() => {
 					// Clear the form after successful upload
@@ -177,7 +187,8 @@ uploadForm.addEventListener('submit', e => {
 				.catch(error => {
 					console.error('Error saving map details:', error);
 				});
-		})
+		});
+	})
 		.catch(error => {
 			console.error('Error uploading map file:', error);
 		});
