@@ -217,12 +217,28 @@ function displayUploadedMaps() {
     			mapItem.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
-				<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>
+				<a id="download-link-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
 				<button class="share-button" onclick="shareLink('${doc.id}')">
-					<i class="fas fa-share"></i> Share
+				<i class="fas fa-share"></i> Share
 				</button>
 				<div id="share-link-${doc.id}" class="share-link" style="display: none;"></div>`;
 				mapList.appendChild(mapItem);
+
+				// Add click event listener to copy the link to clipboard
+				const downloadLink = document.getElementById(`download-link-${doc.id}`);
+				downloadLink.addEventListener('click', function (event) {
+				  event.preventDefault();
+				  const link = event.currentTarget.href;
+			
+				  // Copy link to clipboard
+				  navigator.clipboard.writeText(link)
+					.then(() => {
+					  console.log('Download link copied to clipboard:', link);
+					})
+					.catch(error => {
+					  console.error('Error copying link to clipboard:', error);
+					});
+				});
 			});
 		})
 		.catch(error => {
