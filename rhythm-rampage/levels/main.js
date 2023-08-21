@@ -1,7 +1,6 @@
 // Call the function to display level details when the page loads
-window.onload = function() 
-{
-    displayLevelDetails();
+window.onload = function() {
+	displayLevelDetails();
 };
 
 // Your Firebase configuration
@@ -43,10 +42,10 @@ function logout() {
 //Hamburger Menu
 const menuButton = document.querySelector('.menu-button');
 const navItems = document.querySelector('.nav-items');
-      
-menuButton.addEventListener('click', function () {
-    // Toggle the 'show-menu' class on the header element
-    document.querySelector('.header').classList.toggle('show-menu');
+
+menuButton.addEventListener('click', function() {
+	// Toggle the 'show-menu' class on the header element
+	document.querySelector('.header').classList.toggle('show-menu');
 });
 
 // Check the user's authentication state and show/hide content accordingly
@@ -90,7 +89,7 @@ function upload() {
 	document.getElementById('profile-container').style.display = 'none';
 	document.getElementById('share-container').style.display = 'none';
 	const urlWithoutParams = window.location.href.split('?')[0];
-  	window.history.replaceState({}, document.title, urlWithoutParams);
+	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 function home() {
@@ -101,7 +100,7 @@ function home() {
 	document.getElementById('profile-container').style.display = 'none';
 	document.getElementById('share-container').style.display = 'none';
 	const urlWithoutParams = window.location.href.split('?')[0];
-  	window.history.replaceState({}, document.title, urlWithoutParams);
+	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 function search() {
@@ -124,7 +123,7 @@ function profile() {
 	document.getElementById('share-container').style.display = 'none';
 	displayUserMaps(firebase.auth().currentUser.uid);
 	const urlWithoutParams = window.location.href.split('?')[0];
-  	window.history.replaceState({}, document.title, urlWithoutParams);
+	window.history.replaceState({}, document.title, urlWithoutParams);
 }
 
 // Handle form submission for uploading maps
@@ -156,39 +155,39 @@ uploadForm.addEventListener('submit', e => {
 		.then(downloadURL => {
 
 			// Read the level.json file from the zip and extract the levelVersion
-            const jszip = new JSZip();
-            return jszip.loadAsync(mapFile).then(zip => {
-                return zip.file('level.json').async('string');
-            }).then(levelJson => {
-                const levelInfo = JSON.parse(levelJson);
-                const levelVersion = levelInfo.levelInfo.levelVersion;
-				
-			// Save map details (song name, artist, uploader, download link) to Firestore
-			const db = firebase.firestore();
-			db.collection('maps')
-				.doc(mapId) // Use the generated mapId as the document ID
-				.set({
-					songName,
-					artist,
-					uploader: firebase.auth().currentUser.displayName,
-					uploaderUID: firebase.auth().currentUser.uid,
-					downloadURL,
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-					songNameLower, // Store case-insensitive and punctuation-free versions
-					artistLower,
-					uploaderLower,
-					levelVersion
-				})
-				.then(() => {
-					// Clear the form after successful upload
-					uploadForm.reset();
-					displayUploadedMaps();
-				})
-				.catch(error => {
-					console.error('Error saving map details:', error);
-				});
-		});
-	})
+			const jszip = new JSZip();
+			return jszip.loadAsync(mapFile).then(zip => {
+				return zip.file('level.json').async('string');
+			}).then(levelJson => {
+				const levelInfo = JSON.parse(levelJson);
+				const levelVersion = levelInfo.levelInfo.levelVersion;
+
+				// Save map details (song name, artist, uploader, download link) to Firestore
+				const db = firebase.firestore();
+				db.collection('maps')
+					.doc(mapId) // Use the generated mapId as the document ID
+					.set({
+						songName,
+						artist,
+						uploader: firebase.auth().currentUser.displayName,
+						uploaderUID: firebase.auth().currentUser.uid,
+						downloadURL,
+						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+						songNameLower, // Store case-insensitive and punctuation-free versions
+						artistLower,
+						uploaderLower,
+						levelVersion
+					})
+					.then(() => {
+						// Clear the form after successful upload
+						uploadForm.reset();
+						displayUploadedMaps();
+					})
+					.catch(error => {
+						console.error('Error saving map details:', error);
+					});
+			});
+		})
 		.catch(error => {
 			console.error('Error uploading map file:', error);
 		});
@@ -197,7 +196,7 @@ uploadForm.addEventListener('submit', e => {
 // Fetch and display the list of uploaded maps from Firestore
 function displayUploadedMaps() {
 	const db = firebase.firestore();
-	
+
 	db.collection('maps')
 		.orderBy('timestamp', 'desc')
 		.limit(5)
@@ -214,7 +213,7 @@ function displayUploadedMaps() {
 				const mapData = doc.data();
 				const mapItem = document.createElement('div');
 				mapItem.classList.add('map-card'); // Add a class for styling
-    			mapItem.innerHTML = `
+				mapItem.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
 				<a id="download-link-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
@@ -226,18 +225,18 @@ function displayUploadedMaps() {
 
 				// Add click event listener to copy the link to clipboard
 				const downloadLink = document.getElementById(`download-link-${doc.id}`);
-				downloadLink.addEventListener('click', function (event) {
-				  event.preventDefault();
-				  const link = event.currentTarget.href;
-			
-				  // Copy link to clipboard
-				  navigator.clipboard.writeText(link)
-					.then(() => {
-					  console.log('Download link copied to clipboard:', link);
-					})
-					.catch(error => {
-					  console.error('Error copying link to clipboard:', error);
-					});
+				downloadLink.addEventListener('click', function(event) {
+					event.preventDefault();
+					const link = event.currentTarget.href;
+
+					// Copy link to clipboard
+					navigator.clipboard.writeText(link)
+						.then(() => {
+							console.log('Download link copied to clipboard:', link);
+						})
+						.catch(error => {
+							console.error('Error copying link to clipboard:', error);
+						});
 				});
 			});
 		})
@@ -275,54 +274,68 @@ let currentLimit = 5; // Initialize the limit for the initial search
 
 // Fetch and display the list of uploaded maps from Firestore based on search input
 function searchMaps(searchInput, searchCriteria, limit) {
-  const db = firebase.firestore();
-  
-  // Preprocess the search input for case-insensitive and punctuation-free search
-  const searchInputLower = searchInput.toLowerCase().replace(/[^\w\s]/g, '');
+	const db = firebase.firestore();
 
-  // Construct the query with the given limit
-  searchQuery = db.collection('maps')
-    .where(searchCriteria + 'Lower', '>=', searchInputLower)
-    .where(searchCriteria + 'Lower', '<=', searchInputLower + '\uf8ff')
-    .orderBy(searchCriteria + 'Lower') // Use the searchCriteria field here
-    .orderBy('timestamp', 'desc') // Add this line to maintain the timestamp ordering
-    .limit(limit);
+	// Preprocess the search input for case-insensitive and punctuation-free search
+	const searchInputLower = searchInput.toLowerCase().replace(/[^\w\s]/g, '');
+
+	// Construct the query with the given limit
+	searchQuery = db.collection('maps')
+		.where(searchCriteria + 'Lower', '>=', searchInputLower)
+		.where(searchCriteria + 'Lower', '<=', searchInputLower + '\uf8ff')
+		.orderBy(searchCriteria + 'Lower') // Use the searchCriteria field here
+		.orderBy('timestamp', 'desc') // Add this line to maintain the timestamp ordering
+		.limit(limit);
 
 
-  // Execute the query and return the results
-  return searchQuery.get()
-    .then(snapshot => {
-      const searchResults = document.getElementById('search-results');
-      const noResultsMessage = document.getElementById('no-results-message');
-      searchResults.innerHTML = '';
-      noResultsMessage.style.display = 'none'; // Hide the message initially
+	// Execute the query and return the results
+	return searchQuery.get()
+		.then(snapshot => {
+			const searchResults = document.getElementById('search-results');
+			const noResultsMessage = document.getElementById('no-results-message');
+			searchResults.innerHTML = '';
+			noResultsMessage.style.display = 'none'; // Hide the message initially
 
-      const currentUser = firebase.auth().currentUser;
-      const currentUserUid = currentUser ? currentUser.uid : null;
-      
-      if (snapshot.empty) {
-        noResultsMessage.style.display = 'block'; // Show the message if no results are found
-      } else {
-        snapshot.forEach(doc => {
-          const mapData = doc.data();
-          const mapItem = document.createElement('div');
-		  mapItem.classList.add('map-card');
-          mapItem.innerHTML = `
+			const currentUser = firebase.auth().currentUser;
+			const currentUserUid = currentUser ? currentUser.uid : null;
+
+			if (snapshot.empty) {
+				noResultsMessage.style.display = 'block'; // Show the message if no results are found
+			} else {
+				snapshot.forEach(doc => {
+					const mapData = doc.data();
+					const mapItem = document.createElement('div');
+					mapItem.classList.add('map-card');
+					mapItem.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
-				<a href="${mapData.downloadURL}" download class="download-button">Download Map</a>
+				<a id="download-link-search-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
 				<button class="share-button" onclick="shareLink('${doc.id}', 'search')">
-					<i class="fas fa-share"></i> Share
+				<i class="fas fa-share"></i> Share
 				</button>
 				<div id="share-search-link-${doc.id}" class="share-link" style="display: none;"></div>`;
-          searchResults.appendChild(mapItem);
-        });
-      }
-	  return snapshot;
-    })
-    .catch(error => {
-      console.error('Error fetching search results:', error);
-    });
+					searchResults.appendChild(mapItem);
+					const downloadLinkSearch = document.getElementById(`download-link-search-${doc.id}`);
+					downloadLinkSearch.addEventListener('click', function(event) {
+						event.preventDefault();
+						const link = event.currentTarget.href;
+
+						// Copy link to clipboard
+						navigator.clipboard.writeText(link)
+							.then(() => {
+								console.log('Download link copied to clipboard:', link);
+							})
+							.catch(error => {
+								console.error('Error copying link to clipboard:', error);
+							});
+					});
+				});
+			}
+			return snapshot;
+		})
+		.catch(error => {
+			console.error('Error fetching search results:', error);
+		});
 }
 
 let searchInput; // Define the searchInput variable
@@ -332,121 +345,135 @@ const loadMoreButton = document.getElementById('load-more-button');
 loadMoreButton.addEventListener('click', () => {
 	currentLimit += 5; // Increase the limit by 5
 	searchMaps(searchInput, searchCriteria, currentLimit)
-	  .then(snapshot => {
-		// Handle loading more results
-		const numResults = snapshot.docs.length;
-		if (numResults < currentLimit) {
-		  loadMoreButton.style.display = 'none'; // Hide the "Load More" button
-		}
-	  })
-	  .catch(error => {
-		console.error('Error loading more results:', error);
-	  });
-  });
+		.then(snapshot => {
+			// Handle loading more results
+			const numResults = snapshot.docs.length;
+			if (numResults < currentLimit) {
+				loadMoreButton.style.display = 'none'; // Hide the "Load More" button
+			}
+		})
+		.catch(error => {
+			console.error('Error loading more results:', error);
+		});
+});
 
 const searchForm = document.getElementById('search-form');
 searchForm.addEventListener('submit', e => {
-  e.preventDefault();
+	e.preventDefault();
 
-  searchInput = document.getElementById('search-input').value.trim();
-  searchCriteria = document.getElementById('search-criteria').value;
+	searchInput = document.getElementById('search-input').value.trim();
+	searchCriteria = document.getElementById('search-criteria').value;
 
-  if (searchInput == '') 
-    return;
-    
-  const searchResults = document.getElementById('search-results');
-  searchResults.innerHTML = ''; // Clear previous search results
-  currentLimit = 5; // Reset the limit for a new search
+	if (searchInput == '')
+		return;
 
-  searchMaps(searchInput, searchCriteria, currentLimit) // Initial limit of 5 results
-    .then(snapshot => {
-      // Handle displaying the initial search results
-      if (snapshot.docs.length < currentLimit) {
-        loadMoreButton.style.display = 'none'; // Hide the "Load More" button if there are no more results
-      } else {
-        loadMoreButton.style.display = 'block'; // Display the "Load More" button
-      }
-    })
-    .catch(error => {
-      console.error('Error searching maps:', error);
-    });
+	const searchResults = document.getElementById('search-results');
+	searchResults.innerHTML = ''; // Clear previous search results
+	currentLimit = 5; // Reset the limit for a new search
+
+	searchMaps(searchInput, searchCriteria, currentLimit) // Initial limit of 5 results
+		.then(snapshot => {
+			// Handle displaying the initial search results
+			if (snapshot.docs.length < currentLimit) {
+				loadMoreButton.style.display = 'none'; // Hide the "Load More" button if there are no more results
+			} else {
+				loadMoreButton.style.display = 'block'; // Display the "Load More" button
+			}
+		})
+		.catch(error => {
+			console.error('Error searching maps:', error);
+		});
 });
 
 function updateFile(input) {
 
 	if (input.files && input.files[0].size > (5 * 1024)) {
-        alert("File too large. Max 5KB allowed.");
-        input.value = null;
-    }
+		alert("File too large. Max 5KB allowed.");
+		input.value = null;
+	}
 
 	const fileInput = document.getElementById("map-file");
 	const fileNameDisplay = document.getElementById("uploaded-file-name");
-  
+
 	if (fileInput.files.length > 0) {
-	  fileNameDisplay.textContent = fileInput.files[0].name;
+		fileNameDisplay.textContent = fileInput.files[0].name;
 	} else {
-	  fileNameDisplay.textContent = "(No file chosen)";
+		fileNameDisplay.textContent = "(No file chosen)";
 	}
 }
 
 
 function displayUserMaps(uid, limit = 5) {
 	const db = firebase.firestore();
-	
+
 	let query = db.collection('maps')
-	  .where('uploaderUID', '==', uid)
-	  .orderBy('timestamp', 'desc')
-	  .limit(limit);
-	
+		.where('uploaderUID', '==', uid)
+		.orderBy('timestamp', 'desc')
+		.limit(limit);
+
 	// Check if the query should be further limited based on the user's maps count
 	if (limit === 5) {
-	  query = query.limit(5);
+		query = query.limit(5);
 	}
-  
+
 	query.get()
-	  .then(snapshot => {
-		const yourMapsList = document.getElementById('your-maps-list');
-		const loadMoreButton = document.getElementById('load-more-user-maps-button');
-		
-		yourMapsList.innerHTML = '';
-		
-		snapshot.forEach(doc => {
-		  const mapData = doc.data();
-		  const mapItem = document.createElement('div');
-		  mapItem.classList.add('map-card');
-		  mapItem.innerHTML = `
+		.then(snapshot => {
+			const yourMapsList = document.getElementById('your-maps-list');
+			const loadMoreButton = document.getElementById('load-more-user-maps-button');
+
+			yourMapsList.innerHTML = '';
+
+			snapshot.forEach(doc => {
+				const mapData = doc.data();
+				const mapItem = document.createElement('div');
+				mapItem.classList.add('map-card');
+				mapItem.innerHTML = `
 			<p><strong>Song Name:</strong> ${mapData.songName}</p>
 			<p><strong>Artist:</strong> ${mapData.artist}</p>
-			<a class="download" href="${mapData.downloadURL}" download>Download Map</a>
+			<a id="download-link-profile-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
 			<button class="delete-button" onclick="deleteMap('${doc.id}', this.parentElement)">Delete</button>
 			<button class="share-button" onclick="shareLink('${doc.id}', 'profile')">
 				<i class="fas fa-share"></i> Share
 			</button>
 			<div id="share-profile-link-${doc.id}" class="share-link" style="display: none;"></div>`;
-		  yourMapsList.appendChild(mapItem);
+				yourMapsList.appendChild(mapItem);
+				// Add click event listener to copy the link to clipboard
+				const downloadLinkProfile = document.getElementById(`download-link-profile-${doc.id}`);
+				downloadLinkProfile.addEventListener('click', function(event) {
+					event.preventDefault();
+					const link = event.currentTarget.href;
+
+					// Copy link to clipboard
+					navigator.clipboard.writeText(link)
+						.then(() => {
+							console.log('Download link copied to clipboard:', link);
+						})
+						.catch(error => {
+							console.error('Error copying link to clipboard:', error);
+						});
+				});
+			});
+
+			if (snapshot.docs.length < limit) {
+				loadMoreButton.style.display = 'none';
+			} else {
+				loadMoreButton.style.display = 'block';
+				loadMoreButton.addEventListener('click', () => {
+					limit += 5; // Increase the limit by 5
+					displayUserMaps(uid, limit);
+				});
+			}
+		})
+		.catch(error => {
+			console.error('Error fetching user maps:', error);
 		});
-  
-		if (snapshot.docs.length < limit) {
-		  loadMoreButton.style.display = 'none';
-		} else {
-		  loadMoreButton.style.display = 'block';
-		  loadMoreButton.addEventListener('click', () => {
-			limit += 5; // Increase the limit by 5
-			displayUserMaps(uid, limit);
-		  });
-		}
-	  })
-	  .catch(error => {
-		console.error('Error fetching user maps:', error);
-	  });
-  }
-  
-  function shareLink(mapId, page) {
+}
+
+function shareLink(mapId, page) {
 	const shareableLink = `${window.location.href}?levelid=${mapId}`;
 	var shareLinkDiv = document.getElementById(`share-link-${mapId}`);
-	switch(page)
-	{
-		case "home":	
+	switch (page) {
+		case "home":
 			shareLinkDiv = document.getElementById(`share-link-${mapId}`);
 			break;
 		case "search":
@@ -458,38 +485,52 @@ function displayUserMaps(uid, limit = 5) {
 	}
 	shareLinkDiv.style.display = 'block';
 	shareLinkDiv.innerHTML = `Share this link: <a href="${shareableLink}">${shareableLink}</a>`;
-  }
-  
-  function displayLevelDetails() {
+}
+
+function displayLevelDetails() {
 	const queryString = window.location.search;
 	const urlParams = new URLSearchParams(queryString);
 	const levelId = urlParams.get('levelid');
-	
-	if (levelId) 
-	{
+
+	if (levelId) {
 		document.getElementById('home-container').style.display = 'none';
 		const db = firebase.firestore();
 		const levelDetailsContainer = document.getElementById('share-container');
 		const levelDetails = document.getElementById('level-details');
-	
+
 		// Fetch level details using the levelId
 		db.collection('maps').doc(levelId).get()
 			.then(doc => {
-			if (doc.exists) {
-				const mapData = doc.data();
-				levelDetails.innerHTML = `
+				if (doc.exists) {
+					const mapData = doc.data();
+					levelDetails.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
 				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
-				<a href="${mapData.downloadURL}" download>Download Map</a>`;
-				levelDetailsContainer.style.display = 'block'; // Display the section container
-			} else {
-				levelDetails.innerHTML = 'Level not found';
-				levelDetailsContainer.style.display = 'block'; // Display the section container
-			}
+				<a id="download-link-share-${doc.id}" href="${mapData.downloadURL}" download>Download Map</a>`;
+					levelDetailsContainer.style.display = 'block'; // Display the section container
+					// Add click event listener to copy the link to clipboard
+					const downloadLinkShare = document.getElementById(`download-link-share-${doc.id}`);
+					downloadLinkShare.addEventListener('click', function(event) {
+						event.preventDefault();
+						const link = event.currentTarget.href;
+
+						// Copy link to clipboard
+						navigator.clipboard.writeText(link)
+							.then(() => {
+								console.log('Download link copied to clipboard:', link);
+							})
+							.catch(error => {
+								console.error('Error copying link to clipboard:', error);
+							});
+					});
+				} else {
+					levelDetails.innerHTML = 'Level not found';
+					levelDetailsContainer.style.display = 'block'; // Display the section container
+				}
 			})
 			.catch(error => {
-			console.error('Error fetching level details:', error);
+				console.error('Error fetching level details:', error);
 			});
 	}
 }
