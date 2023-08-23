@@ -46,7 +46,7 @@ function validateMapFile(mapFile) {
           const { songDelay, noteTime, coverLink, audioLink, midNames, difficulties } = mapData.levelData;
           if (typeof songDelay !== 'number' || songDelay < 0 ||
               typeof noteTime !== 'number' || noteTime <= 0 ||
-              typeof coverLink !== 'string' || !/^https:\/\/www\.youtube\.com\/watch/.test(audioLink) ||
+              typeof coverLink !== 'string' || !coverLink.startsWith('https://coverartarchive.org/release/') || !/^https:\/\/www\.youtube\.com\/watch/.test(audioLink) ||
               !Array.isArray(midNames) || midNames.length === 0 || midNames.length > 4 ||
               !midNames.every(name => typeof name === 'string') ||
               new Set(midNames).size !== midNames.length ||
