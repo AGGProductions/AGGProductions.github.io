@@ -216,6 +216,7 @@ function displayUploadedMaps() {
 				mapItem.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
 				<a id="download-link-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
 				<button class="share-button" onclick="shareLink('${doc.id}')">
 				<i class="fas fa-share"></i> Share
@@ -309,6 +310,7 @@ function searchMaps(searchInput, searchCriteria, limit) {
 					mapItem.innerHTML = `
 				<p><strong>Song Name:</strong> ${mapData.songName}</p>
 				<p><strong>Artist:</strong> ${mapData.artist}</p>
+				<p><strong>Uploader:</strong> ${mapData.uploader}</p>
 				<a id="download-link-search-${doc.id}" href="${mapData.downloadURL}" download class="download-button">Download Map</a>
 				<button class="share-button" onclick="shareLink('${doc.id}', 'search')">
 				<i class="fas fa-share"></i> Share
