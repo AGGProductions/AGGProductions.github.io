@@ -1,0 +1,76 @@
+#profile-container {
+    text-align: center;
+    margin: 20px auto;
+  }
+  
+#your-maps-list {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#your-maps-list div {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease-in-out;
+    position: relative;
+}
+
+#your-maps-list div:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#your-maps-list .download {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#your-maps-list .delete-button {
+    display: inline-block;
+    padding: 8px 20px;
+    line-height: 24px;
+    font-size: 15px;
+    background-color: #ff3333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#load-more-user-maps-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 20px;
+}
+
+#load-more-user-maps-button:hover {
+    background-color: #2980b9;
+}
+
+#load-more-user-maps-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+    #your-maps-list div {
+        padding: 15px;
+    }
+}

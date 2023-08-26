@@ -1,0 +1,174 @@
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    line-height:1.5
+  }
+  h2{
+    font-size:30px;
+    margin-bottom:40px
+  }
+  p{
+    font-size:18px
+  }
+  .header{
+    background-color:#333;
+    color:#fff;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+  }
+  .logo{
+    font-size:24px
+  }
+  .nav ul{
+    list-style:none;
+    display:flex
+  }
+  .nav ul li{
+    margin-right:20px
+  }
+  .nav ul li a{
+    color:#fff;
+    text-decoration:none
+  }
+  main{
+    padding:20px
+  }
+  .game-details img{
+    max-width:300px;
+    height:auto;
+    margin-bottom:20px
+  }
+  .game-screenshots img{
+    max-width:300px;
+    height:auto;
+    margin:10px
+  }
+  .game-screenshots .screenshots{
+    display:flex;
+    overflow-x:auto;
+    white-space:nowrap;
+    scrollbar-width:thin;
+    scrollbar-color:#888 #f1f1f1
+  }
+  .center{
+    text-align:center
+  }
+  .game-embed{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    margin-bottom:40px
+  }
+  .placeholder{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    max-width:854px;
+    margin:0 auto
+  }
+  .placeholder img{
+    width:100%;
+    height:auto;
+    max-height:500px
+  }
+  .placeholder .btn{
+    background-color:#f44336;
+    text-decoration:none;
+    color:#fff;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:10px 20px;
+    border-radius:4px;
+    border:0;
+    margin-right:10px
+  }
+  .game-link{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:20px
+  }
+  .game-link .btn{
+    display:inline-block;
+    background-color:#f44336;
+    color:#fff;
+    padding:10px 20px;
+    text-decoration:none;
+    font-size:16px;
+    border-radius:4px;
+    margin-right:10px;
+    white-space:nowrap
+  }
+  .google-play-btn{
+    display:inline-block;
+    height:65px
+  }
+  .google-play-btn img{
+    max-width:100%;
+    max-height:100%
+  }
+  .footer{
+    background-color:#333;
+    color:#fff;
+    padding:20px;
+    text-align:center
+  }
+  .footer p{
+    margin:0
+  }
+  ::-webkit-scrollbar{
+    width:8px
+  }
+  ::-webkit-scrollbar-track{
+    background:#f1f1f1
+  }
+  ::-webkit-scrollbar-thumb{
+    background:#888
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background:#555
+  }
+  html{
+    scrollbar-width:thin;
+    scrollbar-color:#888 #f1f1f1
+  }
+  html{
+    scrollbar-face-color:#888;
+    scrollbar-track-color:#f1f1f1
+  }
+  @media screen and (max-width:767px){
+    .header{
+        flex-direction:column;
+        align-items:center;
+        text-align:center
+    }
+    .nav ul{
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        margin-top:10px;
+        padding-left:0
+    }
+    .nav ul li{
+        margin-right:0;
+        margin-bottom:10px
+    }
+    .game-details img{
+        max-width:100%
+    }
+    .game-screenshots img{
+        max-width:100%
+    }
+    .game-embed iframe{
+        max-width:50%
+    }
+  }
+  
