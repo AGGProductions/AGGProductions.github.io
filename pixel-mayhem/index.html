@@ -4,19 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pixel Mayhem is a fast-paced, top-down survival game where you play as a small pixel">
+    <meta name="description"
+        content="Pixel Mayhem is a fast-paced, top-down survival game where you play as a small pixel">
     <meta content="Pixel Mayhem" property="og:title" />
     <meta content="Pixel Mayhem is a fast-paced, top-down survival game where you play as a small pixel"
         property="og:description" />
     <meta content="https://aggproductions.github.io/pixel-mayhem/" property="og:url" />
-    <meta
-        content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/AGG_Productions.png?raw=true"
+    <meta content="https://github.com/AGGProductions/AGGProductions.github.io/blob/main/AGG_Productions.png?raw=true"
         property="og:image" />
     <title>Pixel Mayhem</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS for hiding main content initially */
+        body.initial-hide main {
+            display: none;
+        }
+    </style>
 </head>
 
-<body>
+<body class="initial-hide"> <!-- Add a class to the body to hide main content initially -->
     <!-- Include the header section here (similar to index.html) -->
     <header class="header">
         <h1 class="logo">AGG Productions</h1>
@@ -30,9 +36,12 @@
     <main>
         <h2 class="center">Pixel Mayhem</h2>
         <section class="game-embed" style="display: block;">
-            <!-- Add a placeholder image and a button to run the game -->
+            <!-- Add a placeholder video and a button to run the game -->
             <div class="placeholder" id="placeholder">
-                <img src="img/img1.jpg" alt="Screenshot 1">
+                <video id="gameVideo" width="854" height="480">
+                    <source src="video/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </section>
         <!-- Download Link to itch.io Page -->
@@ -80,6 +89,20 @@
         <!-- ... Footer content ... -->
     </footer>
     <script src="main.js"></script>
+
+</body>
+
+<body>
+    <sub id="remove" >
+        <div>
+            <p>Please enter the number below to verify you are not a robot</p>
+            <audio id="audioPlayer" src="audio/number.mp3" controls></audio>
+        </div>
+        <div>
+            <input type="text" id="userNumber">
+            <a class="btn" onclick="verify()">Verify</a>
+        </div>
+    </sub>
 </body>
 
 </html>
