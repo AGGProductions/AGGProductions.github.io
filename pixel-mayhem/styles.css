@@ -118,6 +118,21 @@ body{
     min-width: 200px;
     transition: border-color 0.2s ease-in-out;
   }
+
+  #remove {
+    text-align: center;
+}
+
+#remove > div {
+    margin: 0 auto;
+}
+
+  #gameVideo {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
   
   #userNumber:focus {
     border-color: #4CAF50;
