@@ -1,9 +1,18 @@
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    padding:0;
-    line-height:1.5
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+html, body{
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  line-height:1.5;
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
   h2{
     font-size:30px;
     margin-bottom:40px
@@ -119,7 +128,8 @@ body{
     background-color:#333;
     color:#fff;
     padding:20px;
-    text-align:center
+    text-align:center;
+    margin-top: auto;
   }
   .footer p{
     margin:0
